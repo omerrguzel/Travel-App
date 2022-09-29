@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="@dimen/_292sdp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_17sdp"
-        android:background="@drawable/bottom_nav_curved"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -30,4 +19,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/main_graph" />
+
+    <github.com.st235.lib_expandablebottombar.ExpandableBottomBar
+        android:id="@+id/expandable_bottom_bar"
+        android:layout_width="@dimen/_292sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_margin="20dp"
+        app:exb_backgroundColor="#FFFFFF"
+        app:exb_backgroundCornerRadius="100dp"
+        app:exb_itemInactiveColor="#000000"
+        app:exb_itemStyle="normal"
+        app:exb_items="@menu/bottom_navigation_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
