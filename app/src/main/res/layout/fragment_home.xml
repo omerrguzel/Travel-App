@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/imageViewBlueSky"
-        android:layout_width="@dimen/_313sdp"
+        android:layout_width="@dimen/_317sdp"
         android:layout_height="@dimen/_379sdp"
         android:scaleType="fitXY"
         android:src="@drawable/background_home_screen"
@@ -34,7 +34,7 @@
         app:lineHeight="@dimen/_32ssp" />
 
     <include
-        android:id="@+id/item_home_button"
+        android:id="@+id/flight_home_button"
         layout="@layout/item_home_button"
         android:layout_width="@dimen/_54sdp"
         android:layout_height="@dimen/_80sdp"
@@ -42,5 +42,98 @@
         android:layout_marginBottom="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewBlueSky"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/hotels_home_button"
+        layout="@layout/item_home_button"
+        android:layout_width="@dimen/_54sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginStart="@dimen/_90sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewBlueSky"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/cars_home_button"
+        layout="@layout/item_home_button"
+        android:layout_width="@dimen/_54sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginStart="@dimen/_164sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewBlueSky"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/taxi_home_button"
+        layout="@layout/item_home_button"
+        android:layout_width="@dimen/_54sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginStart="@dimen/_240sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewBlueSky"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDeals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_17sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/source_sans_pro_semibold"
+        android:text="Deals"
+        android:textAllCaps="true"
+        android:textColor="#181A25"
+        android:textSize="@dimen/_17ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewBlueSky"
+        android:textFontWeight="600"
+        app:lineHeight="@dimen/_20ssp" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginStart="@dimen/_17sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDeals"
+        app:tabGravity="start"
+        app:tabIndicatorColor="#FF4760"
+        app:tabMode="auto"
+        app:tabSelectedTextColor="#FF4760"
+        app:tabTextAppearance="@style/tab_text"
+        app:tabTextColor="#C2C5D6">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flights" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hotels" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transportations" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDeals"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_117sdp"
+        android:layout_marginStart="@dimen/_17sdp"
+        android:layout_marginTop="@dimen/_17sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
