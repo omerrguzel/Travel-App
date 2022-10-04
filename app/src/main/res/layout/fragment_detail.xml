@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.detail.DetailFragment">
 
-    <TextView
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageViewDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="@dimen/_368sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/customRounded"
+        app:srcCompat="@drawable/background_home_screen" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textViewDetailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_17sdp"
+        android:layout_marginTop="@dimen/_26sdp"
+        android:fontFamily="@font/montserrat_regular"
+        android:lineHeight="@dimen/_38ssp"
+        android:text="Title"
+        android:textFontWeight="400"
+        android:textColor="#0A2753"
+        android:textSize="@dimen/_23ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDetail" />
+
+    <TextView
+        android:id="@+id/textViewLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:drawableStart="@drawable/ic_pin"
+        android:fontFamily="@font/montserrat_light"
+        android:lineHeight="@dimen/_38ssp"
+        android:text="Location"
+        android:textColor="#0A2753"
+        android:textFontWeight="300"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintStart_toStartOf="@+id/textViewDetailTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDetailTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

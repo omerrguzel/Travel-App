@@ -3,28 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
+        android:icon="@drawable/bottom_navigation_home_icon_selector"
         android:title="@string/home"
-        android:icon="@drawable/item_home_bottom_menu"
-        app:exb_color="#FF4760"
-        app:exb_badgeColor = "#FFFFFF"
-        app:exb_badgeTextColor = "#FFFFFF"/>
+        app:exb_color="#FF4760" />
 
     <item
         android:id="@+id/search"
         android:title="@string/search"
-        android:icon="@drawable/item_search_bottom_menu"
+        android:icon="@drawable/bottom_navigation_search_icon_selector"
         app:exb_color="#FF4760"/>
 
     <item
         android:id="@+id/trip"
         android:title="@string/trip"
-        android:icon="@drawable/item_trip_bottom_menu"
+        android:icon="@drawable/bottom_navigation_trip_icon_selector"
         app:exb_color="#FF4760"/>
 
     <item
         android:id="@+id/guide"
         android:title="@string/guide"
-        android:icon="@drawable/item_guide_bottom_menu"
+        android:icon="@drawable/bottom_navigation_guide_icon_selector"
         app:exb_color="#FF4760"/>
 
 </menu>

@@ -22,15 +22,18 @@
         app:lineHeight="@dimen/_29sdp" />
 
     <EditText
-        android:id="@+id/searchView"
-        android:layout_width="@dimen/_298sdp"
+        android:id="@+id/editTextSearchSearchScreen"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_14sdp"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
         android:background="@drawable/background_edittext_search"
         android:drawableEnd="@drawable/ic_search_edittext"
         android:drawableTint="#FF667A"
         android:fontFamily="@font/source_sans_pro_regular"
         android:hint="Where next?"
+        android:importantForAutofill="no"
         android:lineHeight="@dimen/_17ssp"
         android:paddingStart="10dp"
         android:paddingTop="14dp"
@@ -42,8 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSearch"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
 
     <TextView
         android:id="@+id/textViewTopDestinations"
@@ -59,7 +61,7 @@
         android:textFontWeight="600"
         android:textSize="@dimen/_17ssp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSearchSearchScreen" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTopDestinations"

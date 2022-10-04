@@ -101,7 +101,7 @@
         app:tabIndicatorColor="#FF4760"
         app:tabMode="auto"
         app:tabSelectedTextColor="#FF4760"
-        app:tabTextAppearance="@style/tab_text"
+        app:tabTextAppearance="@style/tab_text_home"
         app:tabTextColor="#C2C5D6">
 
         <com.google.android.material.tabs.TabItem

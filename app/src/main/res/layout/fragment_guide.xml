@@ -1,13 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.guide.GuideFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/textViewGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_49sdp"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:text="Guide"
+        android:textColor="#292C3D"
+        android:textFontWeight="700"
+        android:textSize="@dimen/_23ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="@dimen/_29sdp" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textViewTopDestinations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:fontFamily="@font/source_sans_pro_semibold"
+        android:letterSpacing="-0.03"
+        android:lineHeight="@dimen/_21ssp"
+        android:text="MIGHT NEED THESE"
+        android:textColor="#292C3D"
+        android:textFontWeight="600"
+        android:textSize="@dimen/_17ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGuide" />
+
+    <TextView
+        android:id="@+id/textViewSeeAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:fontFamily="@font/source_sans_pro_semibold"
+        android:lineHeight="@dimen/_15ssp"
+        android:text="@string/see_all"
+        android:textColor="#FF4760"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTopDestinations"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMightNeedThese"
+        android:layout_width="@dimen/_286sdp"
+        android:layout_height="@dimen/_104sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTopDestinations" />
+
+
+    <EditText
+        android:id="@+id/editTextSearchGuideScreen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        android:background="@drawable/background_edittext_search"
+        android:drawableEnd="@drawable/ic_search_edittext"
+        android:drawableTint="#FF667A"
+        android:fontFamily="@font/source_sans_pro_regular"
+        android:hint="A country, a city, a place... or anything ?"
+        android:importantForAutofill="no"
+        android:lineHeight="@dimen/_17ssp"
+        android:paddingStart="10dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="14dp"
+        android:textColorHint="#52577A"
+        android:textFontWeight="400"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewMightNeedThese" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategoryChips"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSearchGuideScreen" />
+
+    <TextView
+        android:id="@+id/textViewTopPickArticles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:fontFamily="@font/source_sans_pro_semibold"
+        android:letterSpacing="-0.03"
+        android:lineHeight="@dimen/_21ssp"
+        android:text="TOP-PICK ARTICLES"
+        android:textColor="#292C3D"
+        android:textFontWeight="600"
+        android:textSize="@dimen/_17ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewCategoryChips" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTopPickArticles"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_207sdp"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTopPickArticles" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

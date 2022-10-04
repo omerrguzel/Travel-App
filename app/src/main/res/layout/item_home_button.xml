@@ -36,7 +36,7 @@
             app:backgroundTint="#4DFCFCFD"
             app:cornerRadius="8dp"
             app:elevation="0dp"
-            app:icon="@drawable/home_button_flight"
+            app:icon="@drawable/ic_flight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

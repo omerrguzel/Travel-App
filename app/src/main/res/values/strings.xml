@@ -6,4 +6,8 @@
     <string name="search">Search</string>
     <string name="trip">Trip</string>
     <string name="guide">Guide</string>
+    <string name="trips">Trips</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="trip_plan">Trip Plan</string>
+    <string name="see_all"><u>See all</u></string>
 </resources>
