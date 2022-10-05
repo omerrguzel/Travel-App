@@ -1,135 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout>
 
-    android:id="@+id/cardViewDeals"
-    android:layout_width="@dimen/_275sdp"
-    android:layout_height="@dimen/_154sdp"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="10dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    <data>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    </data>
 
-        <ImageView
-            android:id="@+id/imageViewDeals"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:ignore="contentDescription"/>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/textViewCategory"
+        android:id="@+id/cardViewDeals"
+        android:layout_width="@dimen/_275sdp"
+        android:layout_height="@dimen/_154sdp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@id/imageViewDeals"
-            android:layout_alignTop="@id/imageViewDeals"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="#FF4760"
-            android:padding="@dimen/_4sdp"
-            android:textColor="#FCFCFD"
-            tools:text="CATEGORY" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonBookmark"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_alignTop="@id/imageViewDeals"
-            android:layout_alignEnd="@id/imageViewDeals"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/background_button_bookmark"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            app:backgroundTint="@android:color/transparent"
-            app:icon="@drawable/tab_layout_bookmark_icon_selector"
-            app:iconGravity="top"
-            app:iconTint="#FCFCFD" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:fontFamily="@font/source_sans_pro_bold"
-                android:gravity="center_vertical"
-                android:lineHeight="@dimen/_24ssp"
-                android:text="Title"
-                android:textAlignment="center"
-                android:textColor="#FCFCFD"
-                android:textFontWeight="700"
-                android:textSize="@dimen/_19ssp"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/textViewType"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:fontFamily="@font/source_sans_pro_regular"
-                android:gravity="center_vertical"
-                android:text="LocationDate"
-                android:textAlignment="center"
-                android:textColor="#FCFCFD"
-                tools:ignore="RtlCompat" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/imageViewDeals"
-            android:layout_marginBottom="@dimen/_11sdp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewImageAmount"
+            <ImageView
+                android:id="@+id/imageViewDeals"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:ignore="contentDescription" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_image_count"
-                android:drawablePadding="@dimen/_5sdp"
-                android:drawableTint="#FF4760"
-                android:fontFamily="@font/source_sans_pro_regular"
-                android:gravity="left"
-                android:lineHeight="@dimen/_20ssp"
-                android:paddingStart="@dimen/_10sdp"
+                android:layout_alignStart="@id/imageViewDeals"
+                android:layout_alignTop="@id/imageViewDeals"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/background_textview_category"
+                android:padding="@dimen/_4sdp"
                 android:textColor="#FCFCFD"
-                android:textFontWeight="400"
-                android:textSize="@dimen/_13ssp"
-                tools:text="4 Images" />
+                tools:text="CATEGORY" />
 
-            <TextView
-                android:id="@+id/textViewDuration"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonBookmark"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignTop="@id/imageViewDeals"
+                android:layout_alignEnd="@id/imageViewDeals"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/background_button_bookmark"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:backgroundTint="@android:color/transparent"
+                app:icon="@drawable/tab_layout_bookmark_icon_selector"
+                app:iconGravity="top"
+                app:iconTint="#FCFCFD" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableRight="@drawable/ic_duration"
-                android:drawablePadding="@dimen/_5sdp"
-                android:drawableTint="#FF4760"
-                android:fontFamily="@font/source_sans_pro_regular"
-                android:gravity="right"
-                android:lineHeight="@dimen/_20ssp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:textColor="#FCFCFD"
-                android:textFontWeight="400"
-                android:textSize="@dimen/_13ssp"
-                tools:text="5 days" />
-        </LinearLayout>
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:gravity="center_vertical"
+                    android:lineHeight="@dimen/_24ssp"
+                    android:text="Title"
+                    android:textAlignment="center"
+                    android:textColor="#FCFCFD"
+                    android:textFontWeight="700"
+                    android:textSize="@dimen/_19ssp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/textViewType"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:gravity="center_vertical"
+                    android:text="LocationDate"
+                    android:textAlignment="center"
+                    android:textColor="#FCFCFD"
+                    tools:ignore="RtlCompat" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/imageViewDeals"
+                android:layout_marginBottom="@dimen/_11sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewImageAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_image_count"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableTint="#FF4760"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:gravity="left"
+                    android:lineHeight="@dimen/_20ssp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="#FCFCFD"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/_13ssp"
+                    tools:text="4 Images" />
+
+                <TextView
+                    android:id="@+id/textViewDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/ic_duration"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableTint="#FF4760"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:gravity="right"
+                    android:lineHeight="@dimen/_20ssp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="#FCFCFD"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/_13ssp"
+                    tools:text="5 days" />
+            </LinearLayout>
 
 
-
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

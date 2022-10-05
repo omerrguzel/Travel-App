@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+    </data>
+    <com.google.android.material.chip.Chip
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/chipItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/source_sans_pro_semibold"
+        android:text="Rent A Car"
+        android:textColor="#0048F0"
+        android:textFontWeight="600"
+        android:textSize="@dimen/_14ssp"
+        app:chipBackgroundColor="#FCFCFD"
+        app:chipEndPadding="10dp"
+        app:chipIcon="@drawable/ic_cars"
+        app:chipIconSize="17dp"
+        app:chipIconTint="#0048F0"
+        app:chipStartPadding="15dp"
+        app:chipStrokeColor="#E0E2EB"
+        app:chipStrokeWidth="1dp"
+        app:iconEndPadding="6dp"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="21dp" />
+</layout>

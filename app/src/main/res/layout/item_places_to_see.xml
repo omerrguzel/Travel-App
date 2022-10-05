@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="@dimen/_192sdp"
+        android:layout_height="@dimen/_192sdp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewPlacesToSee"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutShapeableImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/shapeableImageViewPlacesToSee"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_124sdp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonBookmark"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignTop="@id/shapeableImageViewPlacesToSee"
+                    android:layout_alignEnd="@id/shapeableImageViewPlacesToSee"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/background_button_bookmark"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    app:backgroundTint="@android:color/transparent"
+                    app:icon="@drawable/tab_layout_bookmark_icon_selector"
+                    app:iconGravity="top"
+                    app:iconTint="#FCFCFD" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewDescriptionPlacesToSee"
+                    android:layout_width="@dimen/_176sdp"
+                    android:layout_height="@dimen/_52sdp"
+                    android:layout_alignBottom="@id/shapeableImageViewPlacesToSee"
+                    android:layout_marginBottom="@dimen/_minus60sdp"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:text="L.A. is the second-largest city in the US"
+                    android:textColor="#181A25"
+                    android:textFontWeight="700"
+                    android:textSize="@dimen/_14ssp"
+                    app:fontFamily="@font/source_sans_pro_bold" />
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

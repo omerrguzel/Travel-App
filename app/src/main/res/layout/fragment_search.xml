@@ -1,105 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.search.SearchFragment">
+<layout>
 
-    <TextView
-        android:id="@+id/textViewSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_49sdp"
-        android:fontFamily="@font/source_sans_pro_bold"
-        android:text="Search"
-        android:textColor="#292C3D"
-        android:textFontWeight="700"
-        android:textSize="@dimen/_23ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lineHeight="@dimen/_29sdp" />
+    <data>
 
-    <EditText
-        android:id="@+id/editTextSearchSearchScreen"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="@dimen/_14sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_14sdp"
-        android:background="@drawable/background_edittext_search"
-        android:drawableEnd="@drawable/ic_search_edittext"
-        android:drawableTint="#FF667A"
-        android:fontFamily="@font/source_sans_pro_regular"
-        android:hint="Where next?"
-        android:importantForAutofill="no"
-        android:lineHeight="@dimen/_17ssp"
-        android:paddingStart="10dp"
-        android:paddingTop="14dp"
-        android:paddingEnd="44dp"
-        android:paddingBottom="14dp"
-        android:textColorHint="#52577A"
-        android:textFontWeight="400"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
+        android:layout_height="match_parent"
+        tools:context=".presentation.search.SearchFragment">
 
-    <TextView
-        android:id="@+id/textViewTopDestinations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_13sdp"
-        android:fontFamily="@font/source_sans_pro_semibold"
-        android:letterSpacing="-0.03"
-        android:lineHeight="@dimen/_21ssp"
-        android:text="TOP DESTINATIONS"
-        android:textColor="#292C3D"
-        android:textFontWeight="600"
-        android:textSize="@dimen/_17ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSearchSearchScreen" />
+        <TextView
+            android:id="@+id/textViewSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_49sdp"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:text="Search"
+            android:textColor="#292C3D"
+            android:textFontWeight="700"
+            android:textSize="@dimen/_23ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="@dimen/_29sdp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewTopDestinations"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_126sdp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTopDestinations" />
+        <EditText
+            android:id="@+id/editTextSearchSearchScreen"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:background="@drawable/background_edittext_search"
+            android:drawableEnd="@drawable/ic_search_edittext"
+            android:drawableTint="#FF667A"
+            android:fontFamily="@font/source_sans_pro_regular"
+            android:hint="Where next?"
+            android:importantForAutofill="no"
+            android:lineHeight="@dimen/_17ssp"
+            android:paddingStart="10dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="44dp"
+            android:paddingBottom="14dp"
+            android:textColorHint="#52577A"
+            android:textFontWeight="400"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
 
-    <TextView
-        android:id="@+id/textViewNearbyAttractions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:fontFamily="@font/source_sans_pro_semibold"
-        android:letterSpacing="-0.03"
-        android:lineHeight="@dimen/_21ssp"
-        android:text="NEARBY ATTRACTIONS"
-        android:textColor="#292C3D"
-        android:textFontWeight="600"
-        android:textSize="@dimen/_17ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewTopDestinations" />
+        <TextView
+            android:id="@+id/textViewTopDestinations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:fontFamily="@font/source_sans_pro_semibold"
+            android:letterSpacing="-0.03"
+            android:lineHeight="@dimen/_21ssp"
+            android:text="TOP DESTINATIONS"
+            android:textColor="#292C3D"
+            android:textFontWeight="600"
+            android:textSize="@dimen/_17ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearchSearchScreen" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewNearbyAttractions"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_312sdp"
-        android:layout_marginStart="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_13sdp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNearbyAttractions" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewTopDestinations"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_126sdp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTopDestinations" />
+
+        <TextView
+            android:id="@+id/textViewNearbyAttractions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/source_sans_pro_semibold"
+            android:letterSpacing="-0.03"
+            android:lineHeight="@dimen/_21ssp"
+            android:text="NEARBY ATTRACTIONS"
+            android:textColor="#292C3D"
+            android:textFontWeight="600"
+            android:textSize="@dimen/_17ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewTopDestinations" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewNearbyAttractions"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_312sdp"
+            android:layout_marginStart="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_13sdp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNearbyAttractions" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

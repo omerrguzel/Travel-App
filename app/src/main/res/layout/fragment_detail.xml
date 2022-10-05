@@ -1,51 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.detail.DetailFragment">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageViewDetail"
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_368sdp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/customRounded"
-        app:srcCompat="@drawable/background_home_screen" />
+        android:layout_height="match_parent"
+        tools:context=".presentation.detail.DetailFragment">
 
-    <TextView
-        android:id="@+id/textViewDetailTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_17sdp"
-        android:layout_marginTop="@dimen/_26sdp"
-        android:fontFamily="@font/montserrat_regular"
-        android:lineHeight="@dimen/_38ssp"
-        android:text="Title"
-        android:textFontWeight="400"
-        android:textColor="#0A2753"
-        android:textSize="@dimen/_23ssp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewDetail" />
+        <RelativeLayout
+            android:id="@+id/relativeLayoutDetailImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_300sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textViewLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:drawableStart="@drawable/ic_pin"
-        android:fontFamily="@font/montserrat_light"
-        android:lineHeight="@dimen/_38ssp"
-        android:text="Location"
-        android:textColor="#0A2753"
-        android:textFontWeight="300"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintStart_toStartOf="@+id/textViewDetailTitle"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetailTitle" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageViewDetail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_300sdp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/customRounded"
+                app:srcCompat="@drawable/background_home_screen" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewDetailImages"
+                android:layout_width="@dimen/_285sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_alignStart="@id/imageViewDetail"
+                android:layout_alignEnd="@id/imageViewDetail"
+                android:layout_alignBottom="@id/imageViewDetail"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:orientation="horizontal" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/textViewDetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/montserrat_regular"
+            android:lineHeight="@dimen/_38ssp"
+            android:text="Title"
+            android:textColor="#0A2753"
+            android:textFontWeight="400"
+            android:textSize="@dimen/_23ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutDetailImage" />
+
+        <TextView
+            android:id="@+id/textViewLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:drawableStart="@drawable/ic_pin"
+            android:fontFamily="@font/montserrat_light"
+            android:lineHeight="@dimen/_38ssp"
+            android:text="Location"
+            android:textColor="#0A2753"
+            android:textFontWeight="300"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toStartOf="@+id/textViewDetailTitle"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailTitle" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutDetailDescription"
+            android:layout_width="@dimen/_279sdp"
+            android:layout_height="@dimen/_151sdp"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewLocation">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="vertical">
+
+                <TextView
+                    android:id="@+id/textViewDetailDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_light"
+                    android:lineHeight="@dimen/_21ssp"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est vel odio elementum non id venenatis, elementum. Enim augue velit tristique eu viverra. Massa.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est vel odio elementum non id venenatis, elementum. Enim augue velit tristique eu viverra. Massa."
+                    android:textColorLink="#39414B"
+                    android:textSize="@dimen/_13ssp" />
+            </ScrollView>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="@dimen/_258sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Add Bookmark"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            app:backgroundTint="#FF4760"
+            app:cornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutDetailDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
