@@ -2,27 +2,23 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/bottom_navigation_home_icon_selector"
-        android:title="@string/home"
-        app:exb_color="#FF4760" />
+        android:title="@string/home"/>
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/searchFragment"
         android:title="@string/search"
-        android:icon="@drawable/bottom_navigation_search_icon_selector"
-        app:exb_color="#FF4760"/>
+        android:icon="@drawable/bottom_navigation_search_icon_selector"/>
 
     <item
-        android:id="@+id/trip"
+        android:id="@+id/tripFragment"
         android:title="@string/trip"
-        android:icon="@drawable/bottom_navigation_trip_icon_selector"
-        app:exb_color="#FF4760"/>
+        android:icon="@drawable/bottom_navigation_trip_icon_selector"/>
 
     <item
-        android:id="@+id/guide"
+        android:id="@+id/guideFragment"
         android:title="@string/guide"
-        android:icon="@drawable/bottom_navigation_guide_icon_selector"
-        app:exb_color="#FF4760"/>
+        android:icon="@drawable/bottom_navigation_guide_icon_selector"/>
 
 </menu>

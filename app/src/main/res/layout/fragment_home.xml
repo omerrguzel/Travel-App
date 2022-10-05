@@ -103,7 +103,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDeals"
-            app:tabGravity="start"
+            app:tabGravity="center"
             app:tabIndicatorColor="#FF4760"
             app:tabMode="auto"
             app:tabSelectedTextColor="#FF4760"

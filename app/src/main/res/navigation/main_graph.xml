@@ -3,36 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/detailFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.oguzel.travel_app.presentation.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/guideFragment"
         android:name="com.oguzel.travel_app.presentation.guide.GuideFragment"
-        android:label="fragment_guide"
+        android:label="guide"
         tools:layout="@layout/fragment_guide" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.oguzel.travel_app.presentation.search.SearchFragment"
-        android:label="fragment_search"
+        android:label="search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/tripFragment"
         android:name="com.oguzel.travel_app.presentation.trip.TripFragment"
-        android:label="fragment_trip"
+        android:label="trip"
         tools:layout="@layout/fragment_trip" />
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.oguzel.travel_app.presentation.detail.DetailFragment"
-        android:label="fragment_detail"
+        android:label="detail"
         tools:layout="@layout/fragment_detail" />
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.oguzel.travel_app.SearchResultFragment"
-        android:label="fragment_search_result"
+        android:label="search_result"
         tools:layout="@layout/fragment_search_result" />
 </navigation>
