@@ -30,4 +30,9 @@
         android:name="com.oguzel.travel_app.presentation.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.oguzel.travel_app.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" />
 </navigation>
