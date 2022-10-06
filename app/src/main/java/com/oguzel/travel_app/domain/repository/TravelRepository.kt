@@ -1,9 +1,10 @@
 package com.oguzel.travel_app.domain.repository
 
-import com.oguzel.travel_app.domain.model.TravelListModel
-import retrofit2.Call
+import com.oguzel.travel_app.domain.model.TravelModel
+import com.oguzel.travel_app.utils.Resource
+
 
 interface TravelRepository {
 
-    fun getTravelInfo(): Call<TravelListModel>
+    suspend fun getTravelInfo(): Resource<ArrayList<TravelModel>>
 }

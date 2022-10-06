@@ -8,7 +8,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.oguzel.travel_app.databinding.ActivityMainBinding
 import com.oguzel.travel_app.utils.hide
 import com.oguzel.travel_app.utils.show
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         supportActionBar?.hide()
 
-        val bottomNavigationView : BottomNavigationView = binding.bottomNavigationViewMain
+        val bottomNavigationView = binding.bottomNavigationViewMain
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController

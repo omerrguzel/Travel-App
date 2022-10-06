@@ -9,7 +9,8 @@
         android:id="@+id/homeFragment"
         android:name="com.oguzel.travel_app.presentation.home.HomeFragment"
         android:label="home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+    </fragment>
     <fragment
         android:id="@+id/guideFragment"
         android:name="com.oguzel.travel_app.presentation.guide.GuideFragment"
@@ -29,7 +30,11 @@
         android:id="@+id/detailFragment"
         android:name="com.oguzel.travel_app.presentation.detail.DetailFragment"
         android:label="detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+<!--        <argument-->
+<!--            android:name="travelData"-->
+<!--            app:argType="com.oguzel.travel_app.domain.model.TravelModel" />-->
+    </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.oguzel.travel_app.SearchResultFragment"

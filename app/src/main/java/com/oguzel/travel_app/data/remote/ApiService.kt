@@ -1,14 +1,14 @@
 package com.oguzel.travel_app.data.remote
 
 import com.oguzel.travel_app.domain.model.CategoryListModel
-import com.oguzel.travel_app.domain.model.TravelListModel
-import retrofit2.Call
+import com.oguzel.travel_app.domain.model.TravelModel
+import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
     @GET("AllTravelList")
-    fun getTravelInfo(): Call<TravelListModel>
+    suspend fun getTravelInfo() : Response<ArrayList<TravelModel>>
 
     @GET("GuideCategories")
-    fun getGuideCategories(): Call<CategoryListModel>
+    suspend fun getGuideCategories(): Response<CategoryListModel>
 }

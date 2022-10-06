@@ -2,13 +2,17 @@
 <layout>
 
     <data>
-
+        <variable
+            name="travelModel"
+            type="com.oguzel.travel_app.domain.model.TravelModel" />
+        <variable
+            name="imageInfoModel"
+            type="com.oguzel.travel_app.domain.model.ImageInfoModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-
         android:id="@+id/cardViewDeals"
         android:layout_width="@dimen/_275sdp"
         android:layout_height="@dimen/_154sdp"
@@ -19,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
+            android:id="@+id/relativeLayoutItemDeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -27,6 +32,7 @@
                 android:id="@+id/imageViewDeals"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:downloadImageUrl="@{travelModel.imageInfoModels.get(0).url}"
                 android:scaleType="centerCrop"
                 tools:ignore="contentDescription" />
 
@@ -73,7 +79,7 @@
                     android:fontFamily="@font/source_sans_pro_bold"
                     android:gravity="center_vertical"
                     android:lineHeight="@dimen/_24ssp"
-                    android:text="Title"
+                    android:text="@{travelModel.title}"
                     android:textAlignment="center"
                     android:textColor="#FCFCFD"
                     android:textFontWeight="700"

@@ -1,6 +1,9 @@
 package com.oguzel.travel_app.di
 
 import com.oguzel.travel_app.data.remote.ApiService
+import com.oguzel.travel_app.data.remote.RemoteDataSource
+import com.oguzel.travel_app.data.remote.repository.TravelRepositoryImp
+import com.oguzel.travel_app.domain.repository.TravelRepository
 import com.oguzel.travel_app.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -33,5 +36,19 @@ class NetworkModule {
     @Singleton
     fun provideService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        networkApiService: ApiService,
+    ): RemoteDataSource {
+        return RemoteDataSource(networkApiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTravelRepository(remoteDataSource: RemoteDataSource): TravelRepository {
+        return TravelRepositoryImp(remoteDataSource)
     }
 }

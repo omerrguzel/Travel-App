@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/imageViewBlueSky"
             android:layout_width="@dimen/_317sdp"
-            android:layout_height="@dimen/_359sdp"
+            android:layout_height="@dimen/_329sdp"
             android:scaleType="fitXY"
             android:src="@drawable/background_home_screen"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,22 +111,25 @@
             app:tabTextColor="#C2C5D6">
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="All" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabItem"
+                android:id="@+id/tabItemFlights"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Flights" />
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemHotels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hotels" />
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemTransportations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Transportations" />
@@ -134,6 +137,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDeals"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_117sdp"
             android:layout_marginStart="@dimen/_17sdp"
