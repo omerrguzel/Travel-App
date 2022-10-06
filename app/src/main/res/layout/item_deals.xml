@@ -24,8 +24,8 @@
 
         <RelativeLayout
             android:id="@+id/relativeLayoutItemDeal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <ImageView
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:downloadImageUrl="@{travelModel.imageInfoModels.get(0).url}"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 tools:ignore="contentDescription" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -47,7 +47,7 @@
                 android:background="@drawable/background_textview_category"
                 android:padding="@dimen/_4sdp"
                 android:textColor="#FCFCFD"
-                tools:text="CATEGORY" />
+                tools:text="@{travelModel.category.toUpperCase()}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonBookmark"
@@ -66,6 +66,7 @@
                 app:iconTint="#FCFCFD" />
 
             <LinearLayout
+                android:id="@+id/linearLayoutTitleType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -75,24 +76,24 @@
                 <TextView
                     android:id="@+id/textViewTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro_bold"
                     android:gravity="center_vertical"
                     android:lineHeight="@dimen/_24ssp"
-                    android:text="@{travelModel.title}"
                     android:textAlignment="center"
                     android:textColor="#FCFCFD"
                     android:textFontWeight="700"
                     android:textSize="@dimen/_19ssp"
-                    tools:ignore="RtlCompat" />
+                    tools:ignore="RtlCompat"
+                    />
 
                 <TextView
                     android:id="@+id/textViewType"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro_regular"
                     android:gravity="center_vertical"
-                    android:text="LocationDate"
+                    android:text="@{travelModel.country}"
                     android:textAlignment="center"
                     android:textColor="#FCFCFD"
                     tools:ignore="RtlCompat" />
@@ -140,8 +141,6 @@
                     android:textSize="@dimen/_13ssp"
                     tools:text="5 days" />
             </LinearLayout>
-
-
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </layout>

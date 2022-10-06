@@ -1,18 +1,16 @@
-package com.oguzel.travel_app.presentation.home.adapter
-
+package com.oguzel.travel_app.presentation.searchresults.adapter
 
 import androidx.databinding.ViewDataBinding
+import androidx.databinding.library.baseAdapters.BR
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzel.travel_app.databinding.ItemDealsBinding
 import com.oguzel.travel_app.domain.model.TravelModel
-import androidx.databinding.library.baseAdapters.BR
-import androidx.navigation.Navigation
+import com.oguzel.travel_app.presentation.searchresults.SearchResultFragmentDirections
 import com.oguzel.travel_app.utils.gone
 import com.oguzel.travel_app.utils.setMargins
-import com.oguzel.travel_app.presentation.home.HomeFragmentDirections
 
-
-class HomeDealsViewHolder(
+class SearchResultsViewHolder(
     private val travelBinding: ViewDataBinding,
 ) : RecyclerView.ViewHolder(travelBinding.root) {
     fun onBind(travelModel : TravelModel) {
@@ -20,7 +18,7 @@ class HomeDealsViewHolder(
 
         binding.apply {
             setVariable(BR.travelModel, travelModel)
-            cardViewDeals.setMargins(left = 10, right = 10)
+            cardViewDeals.setMargins(top = 10, bottom = 10)
             textViewCategory.gone()
             buttonBookmark.gone()
             textViewType.gone()
@@ -28,15 +26,13 @@ class HomeDealsViewHolder(
             textViewDuration.gone()
             textViewTitle.text = travelModel.title.split(",").first()
             textViewTitle.textSize = 20F
-            cardViewDeals.layoutParams.width = 260
-            cardViewDeals.layoutParams.height = 140
-//            cardViewDeals.layoutParams.width = R.dimen._152sdp
-//            cardViewDeals.layoutParams.height = R.dimen._117sdp
+            cardViewDeals.layoutParams.width = 300
+            cardViewDeals.layoutParams.height = 200
 
             cardViewDeals.setOnClickListener {
 
                 Navigation.findNavController(it)
-                    .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(travelModel.id))
+                    .navigate(SearchResultFragmentDirections.actionSearchResultFragmentToDetailFragment(travelModel.id))
             }
         }
     }

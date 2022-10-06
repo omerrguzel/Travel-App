@@ -13,4 +13,15 @@ class TravelUseCase @Inject constructor(
         performNetworkOperation {
             travelRepository.getTravelInfo()
         }
+
+    fun getTravelById(id: String) =
+        performNetworkOperation {
+            travelRepository.getTravelById(id)
+        }
+
+    fun getGuideCategories() =
+        performNetworkOperation {
+            travelRepository.getGuideCategories()
+        }
+
     }

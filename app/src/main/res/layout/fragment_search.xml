@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_13sdp"
-            android:layout_marginTop="@dimen/_49sdp"
+            android:layout_marginTop="@dimen/_25sdp"
             android:fontFamily="@font/source_sans_pro_bold"
             android:text="Search"
             android:textColor="#292C3D"
@@ -27,34 +27,47 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lineHeight="@dimen/_29sdp" />
 
-        <EditText
-            android:id="@+id/editTextSearchSearchScreen"
+        <LinearLayout
+            android:id="@+id/linearLayoutSearchBar"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/background_edittext_search"
             android:layout_marginStart="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_14sdp"
-            android:background="@drawable/background_edittext_search"
-            android:drawableEnd="@drawable/ic_search_edittext"
-            android:drawableTint="#FF667A"
-            android:fontFamily="@font/source_sans_pro_regular"
-            android:hint="Where next?"
-            android:importantForAutofill="no"
-            android:lineHeight="@dimen/_17ssp"
-            android:paddingStart="10dp"
-            android:paddingTop="14dp"
-            android:paddingEnd="44dp"
-            android:paddingBottom="14dp"
-            android:textColorHint="#52577A"
-            android:textFontWeight="400"
-            android:textSize="@dimen/_13ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewSearch">
+
+            <EditText
+                android:id="@+id/editTextSearchSearchScreen"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/_255sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:fontFamily="@font/source_sans_pro_regular"
+                android:hint="Where next?"
+                android:importantForAutofill="no"
+                android:lineHeight="@dimen/_17ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:textColorHint="#52577A"
+                android:textFontWeight="400"
+                android:textSize="@dimen/_13ssp" />
+            <ImageView
+                android:id="@+id/buttonSearchSearchScreen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:src="@drawable/ic_search_edittext"/>
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/textViewTopDestinations"
+            android:id="@+id/textViewMustSee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_13sdp"
@@ -67,17 +80,18 @@
             android:textFontWeight="600"
             android:textSize="@dimen/_17ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearchSearchScreen" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutSearchBar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewTopDestinations"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_126sdp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTopDestinations" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewMustSee" />
 
         <TextView
             android:id="@+id/textViewNearbyAttractions"
@@ -97,11 +111,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewNearbyAttractions"
-            android:layout_width="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_height="@dimen/_312sdp"
-            android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_13sdp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

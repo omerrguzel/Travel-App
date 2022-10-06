@@ -4,7 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.net.toUri
-import androidx.core.view.*
+import androidx.core.view.marginBottom
+import androidx.core.view.marginLeft
+import androidx.core.view.marginRight
+import androidx.core.view.marginTop
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -37,13 +40,12 @@ fun View.setMargins(
 fun ImageView.downloadFromUrl(img_src: String?) {
 
     img_src?.let {
-        val imgUri = img_src.toUri().buildUpon().scheme("https").build()
         Glide.with(context)
             .load(img_src)
             .apply(
                 RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image)
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
             )
             .into(this)
     }
@@ -57,13 +59,26 @@ fun downloadImage(view: ImageView, img_src: String?) {
     view.downloadFromUrl(img_src)
 }
 
-fun categorizeModel(categoryFilter : String, arrayList: List<TravelModel>)
-: List<TravelModel>{
+fun categorizeModel(categoryFilter: String, arrayList: List<TravelModel>)
+        : List<TravelModel> {
     var tempArrayList = arrayListOf<TravelModel>()
-        arrayList.forEach { i ->
-            when (i.category) {
-                categoryFilter -> tempArrayList.add(i)
-            }
+    arrayList.forEach { i ->
+        when (i.category) {
+            categoryFilter -> tempArrayList.add(i)
         }
+    }
     return tempArrayList.shuffled()
+}
+
+fun searchModel(
+    searchQuery : String,
+    arrayList: List<TravelModel>
+) : List<TravelModel>{
+    var tempArrayList = arrayListOf<TravelModel>()
+    arrayList.forEach { data ->
+        if(data.title.contains(searchQuery) || data.description.contains(searchQuery)) {
+            tempArrayList.add(data)
+        }
+    }
+    return tempArrayList
 }

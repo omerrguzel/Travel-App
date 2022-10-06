@@ -1,4 +1,4 @@
-package com.oguzel.travel_app.presentation.detail
+package com.oguzel.travel_app.presentation.searchresults
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,41 +11,51 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.oguzel.travel_app.R
-import com.oguzel.travel_app.databinding.FragmentDetailBinding
+import com.oguzel.travel_app.databinding.FragmentSearchResultBinding
 import com.oguzel.travel_app.domain.model.TravelModel
+import com.oguzel.travel_app.presentation.searchresults.adapter.SearchResultsAdapter
 import com.oguzel.travel_app.utils.Resource
+import com.oguzel.travel_app.utils.searchModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class SearchResultFragment : Fragment() {
 
-    private lateinit var dataBinding: FragmentDetailBinding
-    private val navArgs: DetailFragmentArgs by navArgs()
-    private val viewModel: DetailViewModel by viewModels()
+    private lateinit var binding: FragmentSearchResultBinding
+    private val viewModel: SearchResultViewModel by viewModels()
+    private var searchAdapter: SearchResultsAdapter = SearchResultsAdapter(arrayListOf())
+    private lateinit var tempList: List<TravelModel>
+    private val navArgs: SearchResultFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-        return dataBinding.root
+    ): View? {
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchTravelInfo(navArgs.travelId)
+
+        fetchTravelInfo()
         backButtonController()
+
     }
 
-    fun fetchTravelInfo(travelId: String) {
-        viewModel.getTravelInfoDetail(travelId).observe(viewLifecycleOwner) {
+    private fun fetchTravelInfo() {
+        viewModel.getTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.SUCCESS -> {
-                    println(it.data)
-                    dataBinding.travelModel = it.data!!
-                    dataBinding.executePendingBindings()
+                    tempList = it.data!!
+                    println("Success!!!")
+                    this.searchAdapter.setTravelList(
+                        searchModel(navArgs.searchQuery, tempList)
+                    )
+                    binding.recyclerViewSearchResults.adapter = searchAdapter
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)
@@ -55,7 +65,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun backButtonController() {
-        dataBinding.buttonBackDetail.setOnClickListener {
+        binding.buttonBackSearchResults.setOnClickListener {
             findNavController().popBackStack()
         }
     }

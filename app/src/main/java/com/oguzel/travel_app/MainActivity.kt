@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.oguzel.travel_app.databinding.ActivityMainBinding
 import com.oguzel.travel_app.utils.hide
 import com.oguzel.travel_app.utils.show
@@ -17,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = binding.bottomNavigationViewMain
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        navController = navHostFragment.navController
-        setupWithNavController(bottomNavigationView,navController)
+        val navController = navHostFragment.navController
+
+        bottomNavigationView.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment, R.id.tripFragment, R.id.guideFragment))
         setupActionBarWithNavController(navController,appBarConfiguration)
 

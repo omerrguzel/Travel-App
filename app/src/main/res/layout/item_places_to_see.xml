@@ -2,7 +2,12 @@
 <layout>
 
     <data>
-
+        <variable
+            name="travelModel"
+            type="com.oguzel.travel_app.domain.model.TravelModel" />
+        <variable
+            name="imageInfoModel"
+            type="com.oguzel.travel_app.domain.model.ImageInfoModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,6 +35,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/shapeableImageViewPlacesToSee"
+                    android:downloadImageUrl="@{travelModel.imageInfoModels.get(0).url}"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_124sdp" />
 
@@ -57,7 +63,7 @@
                     android:layout_marginBottom="@dimen/_minus60sdp"
                     android:paddingStart="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_8sdp"
-                    android:text="L.A. is the second-largest city in the US"
+                    android:text="@{travelModel.description}"
                     android:textColor="#181A25"
                     android:textFontWeight="700"
                     android:textSize="@dimen/_14ssp"

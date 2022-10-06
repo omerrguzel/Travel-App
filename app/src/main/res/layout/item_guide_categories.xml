@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-
+        <variable
+            name="categoryModel"
+            type="com.oguzel.travel_app.domain.model.CategoryModel" />
     </data>
     <com.google.android.material.chip.Chip
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/source_sans_pro_semibold"
-        android:text="Rent A Car"
+        android:text="@{categoryModel.title}"
         android:textColor="#0048F0"
         android:textFontWeight="600"
         android:textSize="@dimen/_14ssp"

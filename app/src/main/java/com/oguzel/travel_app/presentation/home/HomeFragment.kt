@@ -23,8 +23,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
     private var adapter: HomeDealsAdapter = HomeDealsAdapter(arrayListOf())
-    private var currentTabItem : Int = 0
-
     private lateinit var tempList : List<TravelModel>
 
     override fun onCreateView(
@@ -69,10 +67,10 @@ class HomeFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){
                     0 -> {
-                        adapter.setTravelList(
+                        adapter.setTravelList((
                                     categorizeModel("flight",tempList)+
                                     categorizeModel("hotel",tempList)+
-                                    categorizeModel("transportation",tempList))
+                                    categorizeModel("transportation",tempList)).shuffled())
                         binding.recyclerViewDeals.adapter = adapter
                     }
                     1 -> {

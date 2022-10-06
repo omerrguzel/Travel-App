@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.guide.GuideFragment">
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_13sdp"
-            android:layout_marginTop="@dimen/_49sdp"
+            android:layout_marginTop="@dimen/_25sdp"
             android:fontFamily="@font/source_sans_pro_bold"
             android:text="Guide"
             android:textColor="#292C3D"
@@ -28,7 +28,7 @@
             app:lineHeight="@dimen/_29sdp" />
 
         <TextView
-            android:id="@+id/textViewTopDestinations"
+            android:id="@+id/textViewMustSee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_13sdp"
@@ -36,7 +36,7 @@
             android:fontFamily="@font/source_sans_pro_semibold"
             android:letterSpacing="-0.03"
             android:lineHeight="@dimen/_21ssp"
-            android:text="MIGHT NEED THESE"
+            android:text="MUST SEE"
             android:textColor="#292C3D"
             android:textFontWeight="600"
             android:textSize="@dimen/_17ssp"
@@ -52,54 +52,69 @@
             android:lineHeight="@dimen/_15ssp"
             android:text="@string/see_all"
             android:textColor="#FF4760"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewTopDestinations"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewMustSee"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMightNeedThese"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
             android:layout_width="@dimen/_286sdp"
-            android:layout_height="@dimen/_104sdp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTopDestinations" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewMustSee" />
 
 
-        <EditText
-            android:id="@+id/editTextSearchGuideScreen"
+        <LinearLayout
+            android:id="@+id/linearLayoutSearchBarGuideScreen"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/background_edittext_search"
             android:layout_marginStart="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_14sdp"
-            android:background="@drawable/background_edittext_search"
-            android:drawableEnd="@drawable/ic_search_edittext"
-            android:drawableTint="#FF667A"
-            android:fontFamily="@font/source_sans_pro_regular"
-            android:hint="A country, a city, a place... or anything ?"
-            android:importantForAutofill="no"
-            android:lineHeight="@dimen/_17ssp"
-            android:paddingStart="10dp"
-            android:paddingTop="14dp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="14dp"
-            android:textColorHint="#52577A"
-            android:textFontWeight="400"
-            android:textSize="@dimen/_13ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewMightNeedThese" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewMightNeedThese">
+
+            <EditText
+                android:id="@+id/editTextSearchGuideScreen"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/_255sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:fontFamily="@font/source_sans_pro_regular"
+                android:hint="Where next?"
+                android:importantForAutofill="no"
+                android:lineHeight="@dimen/_17ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:textColorHint="#52577A"
+                android:textFontWeight="400"
+                android:textSize="@dimen/_13ssp" />
+            <ImageView
+                android:id="@+id/buttonSearchGuideScreen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:src="@drawable/ic_search_edittext"/>
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCategoryChips"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_32sdp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearchGuideScreen" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutSearchBarGuideScreen" />
 
         <TextView
             android:id="@+id/textViewTopPickArticles"
@@ -118,9 +133,11 @@
             app:layout_constraintTop_toBottomOf="@+id/recyclerViewCategoryChips" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewTopPickArticles"
+            android:id="@+id/recyclerViewPlacesToGo"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_192sdp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
