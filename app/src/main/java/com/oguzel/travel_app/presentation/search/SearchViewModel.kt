@@ -2,6 +2,7 @@ package com.oguzel.travel_app.presentation.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.oguzel.travel_app.domain.model.BookmarkRequestModel
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.domain.usecase.TravelUseCase
 import com.oguzel.travel_app.utils.Resource
@@ -17,4 +18,10 @@ class SearchViewModel @Inject constructor(
         return travelUseCase.getTravelInfo()
     }
 
+    fun updateBookmark(
+        id: String,
+        bookmarkRequestModel: BookmarkRequestModel
+    ): LiveData<Resource<TravelModel>> {
+        return travelUseCase.updateBookmark(id, bookmarkRequestModel)
+    }
 }

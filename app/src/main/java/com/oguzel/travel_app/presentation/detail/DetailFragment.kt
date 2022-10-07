@@ -1,5 +1,6 @@
 package com.oguzel.travel_app.presentation.detail
 
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,50 +14,57 @@ import androidx.navigation.fragment.navArgs
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.databinding.FragmentDetailBinding
 import com.oguzel.travel_app.domain.model.BookmarkRequestModel
-import com.oguzel.travel_app.domain.model.TravelModel
+import com.oguzel.travel_app.domain.model.ImageInfoModel
 import com.oguzel.travel_app.presentation.detail.adapter.ImagesAdapter
-import com.oguzel.travel_app.presentation.home.adapter.HomeDealsAdapter
+import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
+import com.oguzel.travel_app.utils.downloadFromUrl
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
-    private lateinit var dataBinding: FragmentDetailBinding
+    private lateinit var binding: FragmentDetailBinding
     private val navArgs: DetailFragmentArgs by navArgs()
     private val viewModel: DetailViewModel by viewModels()
-    private var isBookmark : Boolean = false
+    private var isBookmark: Boolean = false
     private var adapter: ImagesAdapter = ImagesAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-        return dataBinding.root
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchTravelInfo(navArgs.travelId)
         backButtonController()
-        dataBinding.buttonBookmarkDetail.setOnClickListener{
-            updateBookmark(BookmarkRequestModel(true))
+        binding.buttonBookmarkDetail.setOnClickListener {
+            updateBookmark(BookmarkRequestModel(!isBookmark))
         }
+
+        adapter.setOnItemClickListener(object : ImagesAdapter.IImageClickListener{
+            override fun changeImage(imageInfoModel: ImageInfoModel) {
+                binding.imageViewDetail.downloadFromUrl(imageInfoModel.url)
+            }
+        })
     }
 
-    fun fetchTravelInfo(travelId: String) {
+    private fun fetchTravelInfo(travelId: String) {
         viewModel.getTravelInfoDetail(travelId).observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.SUCCESS -> {
-                    println(it.data)
-                    dataBinding.travelModel = it.data!!
+                    binding.travelModel = it.data!!
                     isBookmark = it.data.isBookmark
                     adapter.setTravelList(it.data.imageInfoModels)
-                    dataBinding.recyclerViewDetailImages.adapter =adapter
-                    dataBinding.executePendingBindings()
+                    binding.recyclerViewDetailImages.adapter = adapter
+                    changeBookmarkText(it.data.isBookmark)
+                    binding.executePendingBindings()
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)
@@ -65,19 +73,12 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun updateBookmark(isBookmark : BookmarkRequestModel){
-        viewModel.updateBookmark(navArgs.travelId,isBookmark).observe(viewLifecycleOwner) {
-            when(it.status){
+    private fun updateBookmark(isBookmark: BookmarkRequestModel) {
+        viewModel.updateBookmark(navArgs.travelId, isBookmark).observe(viewLifecycleOwner) {
+            when (it.status) {
                 Resource.Status.LOADING -> {}
                 Resource.Status.SUCCESS -> {
-                    println(it.data?.isBookmark)
-                    println(it.data)
-                    println("SuccessfullPost")
-                    if(it.data?.isBookmark == true){
-                        dataBinding.buttonBookmarkDetail.text = "Remove Bookmark"
-                    } else {
-                        dataBinding.buttonBookmarkDetail.text = "Add Bookmark"
-                    }
+                    changeBookmarkText(it.data?.isBookmark)
                     fetchTravelInfo(navArgs.travelId)
                 }
                 Resource.Status.ERROR -> {
@@ -85,12 +86,19 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun backButtonController() {
-        dataBinding.buttonBackDetail.setOnClickListener {
+        binding.buttonBackDetail.setOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    private fun changeBookmarkText(boolean: Boolean?) {
+        if (boolean == true) {
+            binding.buttonBookmarkDetail.text = "Remove Bookmark"
+        } else {
+            binding.buttonBookmarkDetail.text = "Add Bookmark"
         }
     }
 }

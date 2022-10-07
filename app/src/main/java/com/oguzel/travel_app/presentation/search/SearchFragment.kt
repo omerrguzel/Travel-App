@@ -12,10 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.databinding.FragmentSearchBinding
+import com.oguzel.travel_app.domain.model.BookmarkRequestModel
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.home.HomeFragmentDirections
 import com.oguzel.travel_app.presentation.search.adapter.NearByAttractionsAdapter
 import com.oguzel.travel_app.presentation.search.adapter.TopDestinationsAdapter
+import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
 import com.oguzel.travel_app.utils.categorizeModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +44,11 @@ class SearchFragment : Fragment() {
 
         fetchTravelInfo()
 
+        nearByAttractionsAdapter.setOnItemClickListener(object : BookmarksAdapter.IBookmarkClickListener{
+            override fun changeBookmarkState(id: String, isBookmark: Boolean) {
+                updateBookmark(id, BookmarkRequestModel(!isBookmark))
+            }
+        })
         binding.buttonSearchSearchScreen.setOnClickListener {
             Navigation.findNavController(it)
                 .navigate(SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(binding.editTextSearchSearchScreen.text.toString()))
@@ -69,7 +76,21 @@ class SearchFragment : Fragment() {
                     nearByAttractionsAdapter.setTravelList(
                         categorizeModel("nearby",tempList))
                     binding.recyclerViewNearbyAttractions.adapter = nearByAttractionsAdapter
-                    binding.recyclerViewNearbyAttractions.layoutManager?.scrollToPosition(it.data.size/2)
+                }
+                Resource.Status.ERROR -> {
+                    println(it.message)
+                }
+            }
+        }
+    }
+
+    private fun updateBookmark(id : String, isBookmark: BookmarkRequestModel) {
+        viewModel.updateBookmark(id , isBookmark).observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {}
+                Resource.Status.SUCCESS -> {
+                    println("UpdateBookmark Successful")
+                    fetchTravelInfo()
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)

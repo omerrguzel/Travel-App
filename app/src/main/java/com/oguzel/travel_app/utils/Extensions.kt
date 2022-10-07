@@ -60,20 +60,20 @@ fun downloadImage(view: ImageView, img_src: String?) {
 
 fun categorizeModel(categoryFilter: String, arrayList: List<TravelModel>)
         : List<TravelModel> {
-    var tempArrayList = arrayListOf<TravelModel>()
+    val tempArrayList = arrayListOf<TravelModel>()
     arrayList.forEach { i ->
         when (i.category) {
             categoryFilter -> tempArrayList.add(i)
         }
     }
-    return tempArrayList.shuffled()
+    return tempArrayList
 }
 
 fun searchModel(
     searchQuery : String,
     arrayList: List<TravelModel>
 ) : List<TravelModel>{
-    var tempArrayList = arrayListOf<TravelModel>()
+    val tempArrayList = arrayListOf<TravelModel>()
     arrayList.forEach { data ->
         if(data.title.contains(searchQuery) || data.description.contains(searchQuery)) {
             tempArrayList.add(data)
@@ -85,7 +85,7 @@ fun searchModel(
 fun bookmarkCheckModel(
     arrayList: List<TravelModel>
 ) : List<TravelModel>{
-    var tempArrayList = arrayListOf<TravelModel>()
+    val tempArrayList = arrayListOf<TravelModel>()
     arrayList.forEach { data ->
         if(data.isBookmark) {
             tempArrayList.add(data)

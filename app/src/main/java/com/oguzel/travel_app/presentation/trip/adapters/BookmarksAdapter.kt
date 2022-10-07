@@ -13,15 +13,24 @@ class BookmarksAdapter(
     private var travelList: ArrayList<TravelModel> = ArrayList(),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private lateinit var mListener : IBookmarkClickListener
+
+    fun setOnItemClickListener(mListener : IBookmarkClickListener){
+        this.mListener = mListener
+    }
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val travelBinding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), R.layout.item_deals, parent, false
         )
-        return BookmarksViewHolder(travelBinding)
+        return BookmarksViewHolder(travelBinding,mListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as BookmarksViewHolder).onBind(travelList[position])
+        (holder as BookmarksViewHolder).onBind(travelList[position],mListener)
+
     }
 
     override fun getItemCount(): Int {
@@ -33,5 +42,9 @@ class BookmarksAdapter(
         this.travelList.clear()
         this.travelList.addAll(travelList)
         notifyDataSetChanged()
+    }
+
+    interface IBookmarkClickListener{
+        fun changeBookmarkState(id : String, isBookmark : Boolean)
     }
 }

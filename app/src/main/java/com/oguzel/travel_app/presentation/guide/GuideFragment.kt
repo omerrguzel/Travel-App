@@ -12,10 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.databinding.FragmentGuideBinding
+import com.oguzel.travel_app.domain.model.BookmarkRequestModel
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.guide.adapters.GuideCategoriesAdapter
 import com.oguzel.travel_app.presentation.guide.adapters.MustSeeAdapter
 import com.oguzel.travel_app.presentation.guide.adapters.PlacesToSeeAdapter
+import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
 import com.oguzel.travel_app.utils.categorizeModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class GuideFragment : Fragment() {
 
     private lateinit var binding : FragmentGuideBinding
-    private val guideViewModel: GuideViewModel by viewModels()
+    private val guideViewModel : GuideViewModel by viewModels()
     private var mustSeeAdapter: MustSeeAdapter = MustSeeAdapter(arrayListOf())
     private var placesToSeeAdapter : PlacesToSeeAdapter = PlacesToSeeAdapter(arrayListOf())
     private var guideCategoriesAdapter : GuideCategoriesAdapter = GuideCategoriesAdapter(arrayListOf())
@@ -43,6 +45,11 @@ class GuideFragment : Fragment() {
 
         fetchTravelInfo()
         fetchCategoryInfo()
+        placesToSeeAdapter.setOnItemClickListener(object : PlacesToSeeAdapter.IBookmarkClickListener{
+            override fun changeBookmarkState(id: String, isBookmark: Boolean) {
+                updateBookmark(id, BookmarkRequestModel(!isBookmark))
+            }
+        })
 
         binding.editTextSearchGuideScreen.text = null
         binding.buttonSearchGuideScreen.setOnClickListener {
@@ -92,6 +99,21 @@ class GuideFragment : Fragment() {
                     println("SuccessCategory!!!")
                     guideCategoriesAdapter.setCategoryList(it.data!!)
                     binding.recyclerViewCategoryChips.adapter = guideCategoriesAdapter
+                }
+                Resource.Status.ERROR -> {
+                    println(it.message)
+                }
+            }
+        }
+    }
+
+    private fun updateBookmark(id : String, isBookmark: BookmarkRequestModel) {
+        guideViewModel.updateBookmark(id , isBookmark).observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {}
+                Resource.Status.SUCCESS -> {
+                    println("UpdateBookmark Successful")
+                    fetchTravelInfo()
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)

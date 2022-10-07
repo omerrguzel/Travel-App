@@ -14,8 +14,9 @@ import com.oguzel.travel_app.utils.setMargins
 
 class BookmarksViewHolder(
     private val travelBinding: ViewDataBinding,
+    mListener: BookmarksAdapter.IBookmarkClickListener
 ) : RecyclerView.ViewHolder(travelBinding.root) {
-    fun onBind(travelModel : TravelModel) {
+    fun onBind(travelModel: TravelModel, mListener: BookmarksAdapter.IBookmarkClickListener) {
         val binding = travelBinding as ItemDealsBinding
 
         binding.apply {
@@ -31,18 +32,23 @@ class BookmarksViewHolder(
             imageViewDeals.scaleType = ImageView.ScaleType.CENTER_CROP
             cardViewDeals.layoutParams.width = 358
             cardViewDeals.layoutParams.height = 153
-            if(travelModel.isBookmark){
+            if (travelModel.isBookmark) {
                 buttonBookmark.setIconResource(R.drawable.ic_bookmark_active)
                 buttonBookmark.setIconTintResource(R.color.pink)
             } else {
                 buttonBookmark.setIconResource(R.drawable.ic_bookmark)
             }
 
-            cardViewDeals.setOnClickListener {
+            buttonBookmark.setOnClickListener {
+                mListener.changeBookmarkState(travelModel.id, travelModel.isBookmark)
+            }
 
+            cardViewDeals.setOnClickListener {
                 Navigation.findNavController(it)
                     .navigate(TripFragmentDirections.actionTripFragmentToDetailFragment(travelModel.id))
             }
         }
+
+
     }
 }
