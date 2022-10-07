@@ -1,16 +1,15 @@
-package com.oguzel.travel_app.presentation.search.adapter
+package com.oguzel.travel_app.presentation.trip.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.domain.model.TravelModel
 
-class NearByAttractionsAdapter(
+class BookmarksAdapter(
     private var travelList: ArrayList<TravelModel> = ArrayList(),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -18,11 +17,11 @@ class NearByAttractionsAdapter(
         val travelBinding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), R.layout.item_deals, parent, false
         )
-        return NearByAttractionsViewHolder(travelBinding)
+        return BookmarksViewHolder(travelBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as NearByAttractionsViewHolder).onBind(travelList[position])
+        (holder as BookmarksViewHolder).onBind(travelList[position])
     }
 
     override fun getItemCount(): Int {
@@ -30,7 +29,7 @@ class NearByAttractionsAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setTravelList(travelList: List<TravelModel>) {
+    fun setTravelList(travelList: List<TravelModel>){
         this.travelList.clear()
         this.travelList.addAll(travelList)
         notifyDataSetChanged()

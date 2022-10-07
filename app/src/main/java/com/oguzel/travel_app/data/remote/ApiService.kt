@@ -1,11 +1,11 @@
 package com.oguzel.travel_app.data.remote
 
+import com.oguzel.travel_app.domain.model.BookmarkRequestModel
 import com.oguzel.travel_app.domain.model.CategoryListModel
 import com.oguzel.travel_app.domain.model.CategoryModel
 import com.oguzel.travel_app.domain.model.TravelModel
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
     @GET("AllTravelList")
@@ -16,4 +16,11 @@ interface ApiService {
 
     @GET("GuideCategories")
     suspend fun getGuideCategories(): Response<ArrayList<CategoryModel>>
+
+    @PUT("AllTravelList/{id}")
+    suspend fun updateBookmark(@Path("id") id : String, @Body bookmarkRequestModel: BookmarkRequestModel): Response<TravelModel>
+
+/*    @FormUrlEncoded
+    @POST("AllTravelList")
+    suspend fun updateBookmark(@Field ("isBookmark") isBookmark : Boolean): Response<TravelModel>*/
 }

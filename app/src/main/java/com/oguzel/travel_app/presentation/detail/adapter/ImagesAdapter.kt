@@ -1,38 +1,39 @@
-package com.oguzel.travel_app.presentation.search.adapter
+package com.oguzel.travel_app.presentation.detail.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzel.travel_app.R
-import com.oguzel.travel_app.domain.model.TravelModel
+import com.oguzel.travel_app.domain.model.ImageInfoModel
 
-class NearByAttractionsAdapter(
-    private var travelList: ArrayList<TravelModel> = ArrayList(),
+
+class ImagesAdapter(
+    private var imageList: ArrayList<ImageInfoModel> = ArrayList(),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val travelBinding = DataBindingUtil.inflate<ViewDataBinding>(
-            LayoutInflater.from(parent.context), R.layout.item_deals, parent, false
+            LayoutInflater.from(parent.context), R.layout.item_detail_image, parent, false
         )
-        return NearByAttractionsViewHolder(travelBinding)
+        return ImagesViewHolder(travelBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as NearByAttractionsViewHolder).onBind(travelList[position])
+        (holder as ImagesViewHolder).onBind(imageList[position])
+
     }
 
     override fun getItemCount(): Int {
-        return travelList.size
+        return imageList.size
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setTravelList(travelList: List<TravelModel>) {
-        this.travelList.clear()
-        this.travelList.addAll(travelList)
+    fun setTravelList(imageList: List<ImageInfoModel>) {
+        this.imageList.clear()
+        this.imageList.addAll(imageList)
         notifyDataSetChanged()
     }
 }

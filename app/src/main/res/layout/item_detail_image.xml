@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="travelModel"
+            type="com.oguzel.travel_app.domain.model.TravelModel" />
+        <variable
+            name="imageInfoModel"
+            type="com.oguzel.travel_app.domain.model.ImageInfoModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDetailImage"
+        android:layout_width="@dimen/_59sdp"
+        android:layout_height="@dimen/_44sdp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/imageViewDetailImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:downloadImageUrl="@{imageInfoModel.url}"
+                android:scaleType="fitXY"
+                tools:ignore="contentDescription" />
+
+    </androidx.cardview.widget.CardView>
+</layout>

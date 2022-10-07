@@ -62,8 +62,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewTripsBookmarks"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_438sdp"
+            android:layout_width="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="@dimen/_315sdp"
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_13sdp"

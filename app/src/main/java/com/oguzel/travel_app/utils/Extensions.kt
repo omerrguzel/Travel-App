@@ -3,7 +3,6 @@ package com.oguzel.travel_app.utils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
 import androidx.core.view.marginRight
@@ -77,6 +76,18 @@ fun searchModel(
     var tempArrayList = arrayListOf<TravelModel>()
     arrayList.forEach { data ->
         if(data.title.contains(searchQuery) || data.description.contains(searchQuery)) {
+            tempArrayList.add(data)
+        }
+    }
+    return tempArrayList
+}
+
+fun bookmarkCheckModel(
+    arrayList: List<TravelModel>
+) : List<TravelModel>{
+    var tempArrayList = arrayListOf<TravelModel>()
+    arrayList.forEach { data ->
+        if(data.isBookmark) {
             tempArrayList.add(data)
         }
     }

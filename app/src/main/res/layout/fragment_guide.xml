@@ -111,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutSearchBarGuideScreen" />
@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_13sdp"
-            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/source_sans_pro_semibold"
             android:letterSpacing="-0.03"
             android:lineHeight="@dimen/_21ssp"

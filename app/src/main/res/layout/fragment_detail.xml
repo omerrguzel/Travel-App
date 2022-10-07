@@ -53,8 +53,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewDetailImages"
-                android:layout_width="@dimen/_285sdp"
-                android:layout_height="@dimen/_60sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/_13sdp"
+                android:layout_height="wrap_content"
                 android:layout_alignStart="@id/imageViewDetail"
                 android:layout_alignEnd="@id/imageViewDetail"
                 android:layout_alignBottom="@id/imageViewDetail"
@@ -127,6 +130,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonBookmarkDetail"
             android:layout_width="@dimen/_258sdp"
             android:layout_height="@dimen/_45sdp"
             android:fontFamily="@font/montserrat_semibold"

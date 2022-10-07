@@ -42,7 +42,11 @@
         android:id="@+id/tripFragment"
         android:name="com.oguzel.travel_app.presentation.trip.TripFragment"
         android:label="trip"
-        tools:layout="@layout/fragment_trip" />
+        tools:layout="@layout/fragment_trip" >
+        <action
+            android:id="@+id/action_tripFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.oguzel.travel_app.presentation.detail.DetailFragment"

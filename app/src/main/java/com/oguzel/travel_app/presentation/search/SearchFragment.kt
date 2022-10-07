@@ -69,6 +69,7 @@ class SearchFragment : Fragment() {
                     nearByAttractionsAdapter.setTravelList(
                         categorizeModel("nearby",tempList))
                     binding.recyclerViewNearbyAttractions.adapter = nearByAttractionsAdapter
+                    binding.recyclerViewNearbyAttractions.layoutManager?.scrollToPosition(it.data.size/2)
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)

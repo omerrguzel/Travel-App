@@ -21,6 +21,7 @@ class PlacesToSeeViewHolder(
 
         binding.apply {
             setVariable(BR.travelModel, travelModel)
+            cardViewPlacesToSee.setMargins(left = 5, right = 5)
 
             if(travelModel.isBookmark){
                 buttonBookmark.setIconResource(R.drawable.ic_bookmark_active)
