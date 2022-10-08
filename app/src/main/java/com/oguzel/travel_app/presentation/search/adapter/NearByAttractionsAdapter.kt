@@ -42,12 +42,4 @@ class NearByAttractionsAdapter(
         this.travelList.addAll(travelList)
         notifyDataSetChanged()
     }
-
-    interface IBookmarkClickListener{
-        fun changeBookmarkState(id : String, isBookmark : Boolean)
-
-        fun changeBookmarkAppearance(){
-
-        }
-    }
 }

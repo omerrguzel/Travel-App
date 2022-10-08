@@ -1,6 +1,5 @@
-package com.oguzel.travel_app.presentation
+package com.oguzel.travel_app.presentation.trip
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,17 +13,17 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.button.MaterialButton
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.databinding.BottomSheetTripBinding
-import com.oguzel.travel_app.domain.model.SelectedTripModel
+import com.oguzel.travel_app.data.local.sharedpref.model.SelectedTripModel
+import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.trip.TripViewModel
 import com.oguzel.travel_app.utils.Resource
 import com.oguzel.travel_app.utils.SharedPrefManager
 import com.oguzel.travel_app.utils.dropDownFilterModel
+import com.oguzel.travel_app.utils.findTravelModelByTitle
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class TripBottomSheetFragment : BottomSheetDialogFragment() {
@@ -32,10 +31,13 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetTripBinding
     private val viewModel: TripViewModel by viewModels()
     private lateinit var selectedTitle: String
-    private lateinit var selectedDepartureDate: String
-    private lateinit var selectedArrivalDate: String
+    private var selectedDepartureDate: Long = 0
+    private var selectedArrivalDate: Long = 0
+    private lateinit var selectedDates : String
     private lateinit var sharedPrefManager: SharedPrefManager
     private var selectedTripList: MutableList<SelectedTripModel> = mutableListOf()
+    private lateinit var selectedTripModel : TravelModel
+    private lateinit var findList: MutableList<TravelModel>
 
 
     override fun onCreateView(
@@ -60,49 +62,34 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
 
 
         binding.buttonDepartureDate.setOnClickListener {
-            selectedDepartureDate = openDatePickerDialog(binding.buttonDepartureDate)
-        }
+            val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()
+            datePicker.show(parentFragmentManager, "DatePicker")
 
-        binding.buttonArrivalDate.setOnClickListener {
-            selectedArrivalDate = openDatePickerDialog(binding.buttonArrivalDate)
+            datePicker.addOnPositiveButtonClickListener {
+                selectedDates = datePicker.headerText
+                selectedDepartureDate = datePicker.selection?.first!!
+                selectedArrivalDate = datePicker.selection?.second!!
+            }
+
         }
 
         binding.buttonSave.setOnClickListener {
-            println(selectedDepartureDate + selectedArrivalDate + selectedTitle)
             if (sharedPrefManager.ifContains(PATIKA) == true) {
                 selectedTripList = sharedPrefManager.readDataString(PATIKA).toMutableList()
+                dialog?.dismiss()
             }
 
             selectedTripList.add(
                 SelectedTripModel(
-                    selectedTitle = selectedTitle,
+                    selectedDates = selectedDates,
                     selectedDepartureDate = selectedDepartureDate,
-                    selectedArrivalDate = selectedArrivalDate
+                    selectedArrivalDate = selectedArrivalDate,
+                    travelModel =selectedTripModel
                 )
             )
             sharedPrefManager.writeDataString(PATIKA, selectedTripList.toTypedArray())
         }
 
-        binding.buttonRead.setOnClickListener {
-            if (sharedPrefManager.ifContains(PATIKA) == true) {
-                println(sharedPrefManager.readDataString(PATIKA).toList())
-            } else
-                println("Shared Pref is empty")
-        }
-
-
-//        binding.dropMenuText.onItemSelectedListener(object : AdapterView.OnItemSelectedListener{
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                val item = p0?.getItemAtPosition(p2).toString()
-//                println(item)
-//                Toast.makeText(requireContext(),"$p2 th item selected",Toast.LENGTH_SHORT).show()
-//            }
-//
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
 
         binding.dropMenuText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
@@ -117,6 +104,24 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 selectedTitle = s.toString()
+
+                viewModel.getTravelInfo().observe(viewLifecycleOwner) {
+                    when (it.status) {
+                        Resource.Status.LOADING -> {
+                            Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                        }
+                        Resource.Status.SUCCESS -> {
+                            if(findTravelModelByTitle(selectedTitle,it.data!!).size != 0){
+                                selectedTripModel = findTravelModelByTitle(selectedTitle,it.data!!).get(0)
+
+                            }
+                            println("selected trip model is" +selectedTripModel)
+                        }
+                        Resource.Status.ERROR -> {
+                            println(it.message)
+                        }
+                    }
+                }
             }
         })
 
@@ -144,34 +149,34 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun updateDatePickerButton(
-        myCalendar: Calendar,
-        materialButton: MaterialButton
-    ): String {
-        val myFormat = "dd-MM-yyyy"
-        val sdf = SimpleDateFormat(myFormat, Locale.ROOT)
-        val selectedDate = sdf.format(myCalendar.time)
-        materialButton.text = selectedDate
-        return selectedDate
-    }
+//    private fun updateDatePickerButton(
+//        myCalendar: Calendar,
+//        materialButton: MaterialButton
+//    ): String {
+//        val myFormat = "dd/MM/yyyy"
+//        val sdf = SimpleDateFormat(myFormat, Locale.ROOT)
+//        val selectedDate = sdf.format(myCalendar.time)
+//        materialButton.text = selectedDate
+//        return selectedDate
+//    }
 
-    private fun openDatePickerDialog(materialButton: MaterialButton): String {
-        val myCalendar = Calendar.getInstance()
-        val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            myCalendar.set(Calendar.YEAR, year)
-            myCalendar.set(Calendar.MONTH, month)
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-        }
-
-        DatePickerDialog(
-            requireActivity(),
-            datePicker,
-            myCalendar.get(Calendar.YEAR),
-            myCalendar.get(Calendar.MONTH),
-            myCalendar.get(Calendar.DAY_OF_MONTH)
-        ).show()
-        return updateDatePickerButton(myCalendar, materialButton)
-    }
+//    private fun openDatePickerDialog(materialButton: MaterialButton): String {
+//        val myCalendar = Calendar.getInstance()
+//        val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+//            myCalendar.set(Calendar.YEAR, year)
+//            myCalendar.set(Calendar.MONTH, month)
+//            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+//        }
+//
+//        DatePickerDialog(
+//            requireActivity(),
+//            datePicker,
+//            myCalendar.get(Calendar.YEAR),
+//            myCalendar.get(Calendar.MONTH),
+//            myCalendar.get(Calendar.DAY_OF_MONTH)
+//        ).show()
+//        return updateDatePickerButton(myCalendar, materialButton)
+//    }
 
     companion object {
         const val PATIKA = "PATIKA"

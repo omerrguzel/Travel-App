@@ -21,29 +21,33 @@ class NearByAttractionsViewHolder(
 
         binding.apply {
             setVariable(BR.travelModel, travelModel)
-            cardViewDeals.setMargins(top = 10, bottom = 10)
+            cardViewDeals.apply {
+                setMargins(
+                    top = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp),
+                    bottom = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp))
+                layoutParams.width = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._275sdp)
+                layoutParams.height = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._117sdp)
+                setOnClickListener {
+                    Navigation.findNavController(it)
+                        .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(travelModel.id))
+                }
+            }
+
             textViewImageAmount.gone()
             textViewDuration.gone()
             textViewTitle.text = travelModel.city
             textViewType.text = travelModel.country
-            cardViewDeals.layoutParams.width = 358
-            cardViewDeals.layoutParams.height = 153
-            if(travelModel.isBookmark){
-                buttonBookmark.setIconResource(R.drawable.ic_bookmark_active)
-                buttonBookmark.setIconTintResource(R.color.pink)
-            } else {
-                buttonBookmark.setIconResource(R.drawable.ic_bookmark)
-            }
 
-            buttonBookmark.setOnClickListener {
-                mListener.changeBookmarkState(travelModel.id, travelModel.isBookmark)
-            }
-
-
-            cardViewDeals.setOnClickListener {
-
-                Navigation.findNavController(it)
-                    .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(travelModel.id))
+            buttonBookmark.apply {
+                if(travelModel.isBookmark){
+                    setIconResource(R.drawable.ic_bookmark_active)
+                    setIconTintResource(R.color.pink)
+                } else {
+                    setIconResource(R.drawable.ic_bookmark)
+                }
+                setOnClickListener {
+                    mListener.changeBookmarkState(travelModel.id, travelModel.isBookmark)
+                }
             }
         }
     }

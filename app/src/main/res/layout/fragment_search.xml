@@ -41,10 +41,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewSearch">
 
+            <ImageView
+                android:id="@+id/buttonSearchHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_recent_history"
+                app:tint="@color/pink" />
+
             <EditText
                 android:id="@+id/editTextSearchSearchScreen"
                 android:layout_centerVertical="true"
-                android:layout_width="@dimen/_255sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/_40sdp"
                 android:fontFamily="@font/source_sans_pro_regular"
                 android:hint="Where next?"
@@ -56,12 +65,14 @@
                 android:paddingBottom="@dimen/_8sdp"
                 android:textColorHint="#52577A"
                 android:textFontWeight="400"
+                android:layout_weight="19"
                 android:textSize="@dimen/_13ssp" />
             <ImageView
                 android:id="@+id/buttonSearchSearchScreen"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="5dp"
+                android:padding="@dimen/_8sdp"
                 android:src="@drawable/ic_search_edittext"/>
         </LinearLayout>
 

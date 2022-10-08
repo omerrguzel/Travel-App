@@ -16,6 +16,4 @@ interface TravelRepository {
 
     suspend fun updateBookmark(id : String , bookmarkRequestModel: BookmarkRequestModel) : Resource<TravelModel>
 
-   // suspend fun updateBookmark(isBookmark : Boolean) : Resource<TravelModel>
-
 }

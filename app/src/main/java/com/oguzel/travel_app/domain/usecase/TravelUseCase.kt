@@ -29,12 +29,4 @@ class TravelUseCase @Inject constructor(
         performNetworkOperation {
             travelRepository.updateBookmark(id , bookmarkRequestModel)
         }
-
-
-
-//    fun updateBookmark(isBookmark : Boolean) =
-//        performNetworkOperation {
-//            travelRepository.updateBookmark(isBookmark)
-//        }
-
     }

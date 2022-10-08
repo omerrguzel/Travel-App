@@ -1,5 +1,6 @@
 package com.oguzel.travel_app.presentation.trip.adapters
 
+import android.util.TypedValue
 import android.widget.ImageView
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
@@ -21,34 +22,49 @@ class BookmarksViewHolder(
 
         binding.apply {
             setVariable(BR.travelModel, travelModel)
-            cardViewDeals.setMargins(top = 10, bottom = 10)
+            cardViewDeals.apply {
+                setMargins(
+                    top = context.resources.getDimensionPixelSize(R.dimen._7sdp),
+                    bottom = context.resources.getDimensionPixelSize(R.dimen._7sdp))
+                layoutParams.width = context.resources.getDimensionPixelSize(R.dimen._275sdp)
+                layoutParams.height = context.resources.getDimensionPixelSize(R.dimen._154sdp)
+                setOnClickListener {
+                    Navigation.findNavController(it)
+                        .navigate(TripFragmentDirections.actionTripFragmentToDetailFragment(travelModel.id))
+                }
+            }
+
+            buttonBookmark.apply {
+                if (travelModel.isBookmark) {
+                    setIconResource(R.drawable.ic_bookmark_active)
+                    setIconTintResource(R.color.pink)
+                } else {
+                    setIconResource(R.drawable.ic_bookmark)
+                }
+                setOnClickListener {
+                    mListener.changeBookmarkState(travelModel.id, travelModel.isBookmark)
+                }
+            }
+
+            textViewTitle.apply {
+                text = travelModel.city
+                setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    textViewTitle.context.resources.getDimension(R.dimen._19ssp))
+            }
+
+            textViewType.apply {
+                text = travelModel.country
+                setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    textViewType.context.resources.getDimension(R.dimen._12ssp)
+                )
+            }
+
             textViewCategory.gone()
             textViewImageAmount.gone()
             textViewDuration.gone()
-            textViewTitle.text = travelModel.city
-            textViewTitle.textSize = 20F
-            textViewType.text = travelModel.country
-            textViewType.textSize = 15F
             imageViewDeals.scaleType = ImageView.ScaleType.CENTER_CROP
-            cardViewDeals.layoutParams.width = 358
-            cardViewDeals.layoutParams.height = 153
-            if (travelModel.isBookmark) {
-                buttonBookmark.setIconResource(R.drawable.ic_bookmark_active)
-                buttonBookmark.setIconTintResource(R.color.pink)
-            } else {
-                buttonBookmark.setIconResource(R.drawable.ic_bookmark)
-            }
-
-            buttonBookmark.setOnClickListener {
-                mListener.changeBookmarkState(travelModel.id, travelModel.isBookmark)
-            }
-
-            cardViewDeals.setOnClickListener {
-                Navigation.findNavController(it)
-                    .navigate(TripFragmentDirections.actionTripFragmentToDetailFragment(travelModel.id))
-            }
         }
-
-
     }
 }
