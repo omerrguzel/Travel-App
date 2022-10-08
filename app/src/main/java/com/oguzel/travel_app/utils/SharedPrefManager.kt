@@ -22,16 +22,14 @@ class SharedPrefManager {
     fun readDataString(key: String): Array<SelectedTripModel> {
         val gson = Gson()
         val jsonText: String = sharedPref?.getString(key, null).toString()
-        val text = gson.fromJson(
+        return gson.fromJson(
             jsonText,
             Array<SelectedTripModel>::class.java
         )
-        return text
     }
 
     fun writeDataString(key: String, value : Array<SelectedTripModel>): Boolean {
         val gson = Gson()
-//        val value: List<String> = ArrayList(data)
         val jsonText = gson.toJson(value)
         sharedPref?.let {
             with(it.edit()) {

@@ -17,7 +17,9 @@ import com.oguzel.travel_app.databinding.FragmentSearchResultBinding
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.searchresults.adapter.SearchResultsAdapter
 import com.oguzel.travel_app.utils.Resource
+import com.oguzel.travel_app.utils.gone
 import com.oguzel.travel_app.utils.searchModel
+import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,24 +43,20 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
         fetchTravelInfo()
         backButtonController()
-
-        val searchHistoryModel = SearchHistoryModel(id = 0, navArgs.searchQuery)
-        searchHistoryDatabase?.searchHistoryDao()?.insert(searchHistoryModel)
-
+        addSearchHistoryQuery()
     }
 
     private fun fetchTravelInfo() {
         viewModel.getTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
                     tempList = it.data!!
-                    println("Success!!!")
                     this.searchAdapter.setTravelList(
                         searchModel(navArgs.searchQuery, tempList)
                     )
@@ -75,5 +73,11 @@ class SearchResultFragment : Fragment() {
         binding.buttonBackSearchResults.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun addSearchHistoryQuery(){
+        searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
+        val searchHistoryModel = SearchHistoryModel(id = 0, navArgs.searchQuery)
+        searchHistoryDatabase?.searchHistoryDao()?.insert(searchHistoryModel)
     }
 }

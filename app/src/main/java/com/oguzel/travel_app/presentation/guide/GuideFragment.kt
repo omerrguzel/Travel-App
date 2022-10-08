@@ -20,6 +20,8 @@ import com.oguzel.travel_app.presentation.guide.adapters.PlacesToSeeAdapter
 import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
 import com.oguzel.travel_app.utils.categorizeModel
+import com.oguzel.travel_app.utils.gone
+import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,11 +69,11 @@ class GuideFragment : Fragment() {
         guideViewModel.getTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
                     tempList = it.data!!
-                    println("Success!!!")
                     this.mustSeeAdapter.setTravelList(
                         categorizeModel("mightneed",tempList)
                     )
@@ -93,10 +95,10 @@ class GuideFragment : Fragment() {
         guideViewModel.getGuideCategories().observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
-                    println("SuccessCategory!!!")
+                    binding.progressBar.gone()
                     guideCategoriesAdapter.setCategoryList(it.data!!)
                     binding.recyclerViewCategoryChips.adapter = guideCategoriesAdapter
                 }
@@ -110,9 +112,11 @@ class GuideFragment : Fragment() {
     private fun updateBookmark(id : String, isBookmark: BookmarkRequestModel) {
         guideViewModel.updateBookmark(id , isBookmark).observe(viewLifecycleOwner) {
             when (it.status) {
-                Resource.Status.LOADING -> {}
+                Resource.Status.LOADING -> {
+                    binding.progressBar.show()
+                }
                 Resource.Status.SUCCESS -> {
-                    println("UpdateBookmark Successful")
+                    binding.progressBar.gone()
                     fetchTravelInfo()
                 }
                 Resource.Status.ERROR -> {

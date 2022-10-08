@@ -25,20 +25,16 @@ class SearchHistoryFragment : Fragment() {
     private var tempList: MutableList<String> = mutableListOf()
     private lateinit var searchedQueryList: ArrayList<SearchHistoryModel>
 
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_search_history, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         backButtonController()
         fetchHistory()
         deleteSearchHistory()
@@ -53,9 +49,8 @@ class SearchHistoryFragment : Fragment() {
     private fun fetchHistory() {
         searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
 
-        searchedQueryList =
-            searchHistoryDatabase?.searchHistoryDao()
-                ?.getSearchHistory() as ArrayList<SearchHistoryModel>
+        searchedQueryList = searchHistoryDatabase?.searchHistoryDao()
+            ?.getSearchHistory() as ArrayList<SearchHistoryModel>
         searchedQueryList.forEach { i ->
             tempList.add(i.searchedText)
         }

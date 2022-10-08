@@ -15,6 +15,8 @@ import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.home.adapter.HomeDealsAdapter
 import com.oguzel.travel_app.utils.Resource
 import com.oguzel.travel_app.utils.categorizeModel
+import com.oguzel.travel_app.utils.gone
+import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,18 +38,19 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchTravelInfo()
-        initHomeViews()
+        initHomeButtons()
     }
 
-    fun fetchTravelInfo() {
+    private fun fetchTravelInfo() {
         viewModel.getTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
                     tempList = it.data!!
-                    initTab(tempList.shuffled())
+                    initTab()
                     adapter.setTravelList((
                             categorizeModel("flight",tempList)+
                             categorizeModel("hotel",tempList)+
@@ -61,7 +64,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun initTab(list: List<TravelModel>){
+    private fun initTab(){
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){
@@ -91,7 +94,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    fun initHomeViews(){
+    private fun initHomeButtons(){
         binding.apply {
             flightHomeView.textView.text = context?.resources?.getText(R.string.flights)
             flightHomeView.button.setIconResource(R.drawable.ic_flight)

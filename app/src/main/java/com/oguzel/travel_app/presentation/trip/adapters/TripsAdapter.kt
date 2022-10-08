@@ -13,9 +13,9 @@ class TripsAdapter(
     private var selectedTripList: ArrayList<SelectedTripModel> = ArrayList(),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var mListener : TripsAdapter.IDeleteClickListener
+    private lateinit var mListener : IDeleteClickListener
 
-    fun setOnItemClickListener(mListener : TripsAdapter.IDeleteClickListener){
+    fun setOnItemClickListener(mListener : IDeleteClickListener){
         this.mListener = mListener
     }
 

@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,66 +19,41 @@ import com.oguzel.travel_app.presentation.search.adapter.TopDestinationsAdapter
 import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
 import com.oguzel.travel_app.utils.categorizeModel
+import com.oguzel.travel_app.utils.gone
+import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private lateinit var binding : FragmentSearchBinding
+    private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
-    private var topDestinationsAdapter: TopDestinationsAdapter = TopDestinationsAdapter(arrayListOf())
-    private var nearByAttractionsAdapter : NearByAttractionsAdapter = NearByAttractionsAdapter(arrayListOf())
-    private lateinit var tempList : List<TravelModel>
-    private var searchHistoryDatabase : SearchHistoryDatabase? = null
+    private var topDestinationsAdapter: TopDestinationsAdapter =
+        TopDestinationsAdapter(arrayListOf())
+    private var nearByAttractionsAdapter: NearByAttractionsAdapter =
+        NearByAttractionsAdapter(arrayListOf())
+    private lateinit var tempList: List<TravelModel>
+    private var searchHistoryDatabase: SearchHistoryDatabase? = null
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_search, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        searchHistoryDatabase  = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
+        searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
 
         fetchTravelInfo()
-
-        nearByAttractionsAdapter.setOnItemClickListener(object : BookmarksAdapter.IBookmarkClickListener{
-            override fun changeBookmarkState(id: String, isBookmark: Boolean) {
-                updateBookmark(id, BookmarkRequestModel(!isBookmark))
-            }
-        })
-
-        binding.buttonSearchHistory.setOnClickListener {
-            Navigation.findNavController(it)
-                .navigate(SearchFragmentDirections.actionSearchFragmentToSearchHistoryFragment())
-        }
-        binding.buttonSearchSearchScreen.setOnClickListener {
-
-            var result = ""
-
-            val searchedQueryList: ArrayList<SearchHistoryModel> =
-                searchHistoryDatabase?.searchHistoryDao()?.getSearchHistory() as ArrayList<SearchHistoryModel>
-
-            searchedQueryList.forEach {
-
-                println(it.searchedText+"\n")
-                result += it.searchedText
-
-            }
-
-
-            Navigation.findNavController(it)
-                .navigate(SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(binding.editTextSearchSearchScreen.text.toString()))
-        }
+        navigateSearchHistory()
+        navigateSearchResult()
     }
 
-
-    override fun onViewStateRestored(@Nullable savedInstanceState: Bundle?) {
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         binding.editTextSearchSearchScreen.setText("")
     }
@@ -89,18 +62,26 @@ class SearchFragment : Fragment() {
         viewModel.getTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
                     tempList = it.data!!
-                    println("Success!!!")
                     this.topDestinationsAdapter.setTravelList(
-                        categorizeModel("topdestination",tempList))
+                        categorizeModel("topdestination", tempList)
+                    )
                     binding.recyclerViewTopDestinations.adapter = topDestinationsAdapter
 
                     nearByAttractionsAdapter.setTravelList(
-                        categorizeModel("nearby",tempList))
+                        categorizeModel("nearby", tempList)
+                    )
                     binding.recyclerViewNearbyAttractions.adapter = nearByAttractionsAdapter
+                    nearByAttractionsAdapter.setOnItemClickListener(object :
+                        BookmarksAdapter.IBookmarkClickListener {
+                        override fun changeBookmarkState(id: String, isBookmark: Boolean) {
+                            updateBookmark(id, BookmarkRequestModel(!isBookmark))
+                        }
+                    })
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)
@@ -109,18 +90,38 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun updateBookmark(id : String, isBookmark: BookmarkRequestModel) {
-        viewModel.updateBookmark(id , isBookmark).observe(viewLifecycleOwner) {
+    private fun updateBookmark(id: String, isBookmark: BookmarkRequestModel) {
+        viewModel.updateBookmark(id, isBookmark).observe(viewLifecycleOwner) {
             when (it.status) {
-                Resource.Status.LOADING -> {}
+                Resource.Status.LOADING -> {
+                    binding.progressBar.show()
+                }
                 Resource.Status.SUCCESS -> {
-                    println("UpdateBookmark Successful")
+                    binding.progressBar.gone()
                     fetchTravelInfo()
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)
                 }
             }
+        }
+    }
+
+    private fun navigateSearchHistory(){
+        binding.buttonSearchHistory.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(SearchFragmentDirections.actionSearchFragmentToSearchHistoryFragment())
+        }
+    }
+
+    private fun navigateSearchResult() {
+        binding.buttonSearchSearchScreen.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(
+                    SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(
+                        binding.editTextSearchSearchScreen.text.toString()
+                    )
+                )
         }
     }
 }

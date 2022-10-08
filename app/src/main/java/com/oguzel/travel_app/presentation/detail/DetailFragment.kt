@@ -1,6 +1,5 @@
 package com.oguzel.travel_app.presentation.detail
 
-import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +15,10 @@ import com.oguzel.travel_app.databinding.FragmentDetailBinding
 import com.oguzel.travel_app.domain.model.BookmarkRequestModel
 import com.oguzel.travel_app.domain.model.ImageInfoModel
 import com.oguzel.travel_app.presentation.detail.adapter.ImagesAdapter
-import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
 import com.oguzel.travel_app.utils.downloadFromUrl
+import com.oguzel.travel_app.utils.gone
+import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,7 +45,7 @@ class DetailFragment : Fragment() {
             updateBookmark(BookmarkRequestModel(!isBookmark))
         }
 
-        adapter.setOnItemClickListener(object : ImagesAdapter.IImageClickListener{
+        adapter.setOnItemClickListener(object : ImagesAdapter.IImageClickListener {
             override fun changeImage(imageInfoModel: ImageInfoModel) {
                 binding.imageViewDetail.downloadFromUrl(imageInfoModel.url)
             }
@@ -56,9 +56,10 @@ class DetailFragment : Fragment() {
         viewModel.getTravelInfoDetail(travelId).observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
                     binding.travelModel = it.data!!
                     isBookmark = it.data.isBookmark
                     adapter.setTravelList(it.data.imageInfoModels)
@@ -76,8 +77,11 @@ class DetailFragment : Fragment() {
     private fun updateBookmark(isBookmark: BookmarkRequestModel) {
         viewModel.updateBookmark(navArgs.travelId, isBookmark).observe(viewLifecycleOwner) {
             when (it.status) {
-                Resource.Status.LOADING -> {}
+                Resource.Status.LOADING -> {
+                    binding.progressBar.show()
+                }
                 Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
                     changeBookmarkText(it.data?.isBookmark)
                     fetchTravelInfo(navArgs.travelId)
                 }

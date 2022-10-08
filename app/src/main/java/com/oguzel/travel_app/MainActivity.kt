@@ -23,10 +23,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+
+        init()
+    }
+
+    fun init(){
         supportActionBar?.hide()
-
         val bottomNavigationView = binding.bottomNavigationViewMain
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
@@ -36,13 +39,10 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-
                 R.id.detailFragment -> bottomNavigationView.hide()
                 R.id.searchResultFragment -> bottomNavigationView.hide()
-
                 else -> bottomNavigationView.show()
             }
         }
     }
-
 }

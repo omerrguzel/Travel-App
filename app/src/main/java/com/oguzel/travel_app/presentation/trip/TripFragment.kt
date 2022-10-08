@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.oguzel.travel_app.R
+import com.oguzel.travel_app.data.local.sharedpref.model.SelectedTripModel
 import com.oguzel.travel_app.databinding.FragmentTripBinding
 import com.oguzel.travel_app.domain.model.BookmarkRequestModel
-import com.oguzel.travel_app.data.local.sharedpref.model.SelectedTripModel
-import com.oguzel.travel_app.presentation.trip.TripBottomSheetFragment
 import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.presentation.trip.adapters.TripsAdapter
 import com.oguzel.travel_app.utils.*
@@ -29,7 +27,6 @@ class TripFragment : Fragment() {
     private var selectedTripList: MutableList<SelectedTripModel> = mutableListOf()
     private var tripsAdapter: TripsAdapter = TripsAdapter(arrayListOf())
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,25 +37,49 @@ class TripFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        sharedPrefManager = SharedPrefManager(this.requireActivity())
-        initTripTab()
-        initTab()
+        initTripPage()
+        initSelectedTab()
         refreshData()
-
-        binding.fobAddTrip.setOnClickListener {
-            openBottomSheet()
-            onPause()
-        }
 
     }
 
-    private fun initTab() {
+    private fun initTripPage() {
+
+        sharedPrefManager = SharedPrefManager(this.requireActivity())
+        binding.apply {
+            fobAddTrip.show()
+            recyclerViewTripsBookmarks.show()
+            progressBar.gone()
+            fobAddTrip.setOnClickListener {
+                openBottomSheet()
+            }
+        }
+        if (sharedPrefManager.ifContains(TripBottomSheetFragment.PATIKA) == true) {
+            selectedTripList = sharedPrefManager.readDataString(
+                TripBottomSheetFragment.PATIKA
+            ).toMutableList()
+
+            tripsAdapter.setOnItemClickListener(object :
+                TripsAdapter.IDeleteClickListener {
+                override fun deleteTrip(id: String) {
+                    sharedPrefManager.writeDataString(
+                        TripBottomSheetFragment.PATIKA,
+                        removeTripModelByID(id, selectedTripList).toTypedArray()
+                    )
+                    initTripPage()
+                }
+            })
+            tripsAdapter.setTravelList(selectedTripList)
+            binding.recyclerViewTripsBookmarks.adapter = tripsAdapter
+        }
+    }
+
+    private fun initSelectedTab() {
         binding.tabLayoutTrips.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> {
-                        initTripTab()
+                        initTripPage()
                     }
                     1 -> {
                         binding.fobAddTrip.gone()
@@ -72,14 +93,9 @@ class TripFragment : Fragment() {
                         binding.executePendingBindings()
                     }
                 }
-
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
     }
 
@@ -87,9 +103,10 @@ class TripFragment : Fragment() {
         viewModel.getTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
                     bookmarksAdapter.setTravelList(bookmarkCheckModel(it.data!!))
                     binding.recyclerViewTripsBookmarks.adapter = bookmarksAdapter
                 }
@@ -100,13 +117,14 @@ class TripFragment : Fragment() {
         }
     }
 
-
     private fun updateBookmark(id: String, isBookmark: BookmarkRequestModel) {
         viewModel.updateBookmark(id, isBookmark).observe(viewLifecycleOwner) {
             when (it.status) {
-                Resource.Status.LOADING -> {}
+                Resource.Status.LOADING -> {
+                    binding.progressBar.gone()
+                }
                 Resource.Status.SUCCESS -> {
-                    println("UpdateBookmark Successful")
+                    binding.progressBar.show()
                     fetchTravelInfo()
                 }
                 Resource.Status.ERROR -> {
@@ -117,49 +135,19 @@ class TripFragment : Fragment() {
     }
 
     private fun openBottomSheet() {
-
-
         val bottomSheetFragment = TripBottomSheetFragment()
         bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
-
-    }
-
-    private fun initTripTab() {
-        binding.fobAddTrip.show()
-        binding.recyclerViewTripsBookmarks.show()
-        binding.tripLoading.gone()
-
-        if (sharedPrefManager.ifContains(TripBottomSheetFragment.PATIKA) == true) {
-            println(sharedPrefManager.readDataString(TripBottomSheetFragment.PATIKA).toList())
-            selectedTripList = sharedPrefManager.readDataString(
-                TripBottomSheetFragment.PATIKA
-            ).toMutableList()
-
-            tripsAdapter.setOnItemClickListener(object :
-                TripsAdapter.IDeleteClickListener{
-                override fun deleteTrip(id: String) {
-                    sharedPrefManager.writeDataString(TripBottomSheetFragment.PATIKA, removeTripModelByID(id,selectedTripList).toTypedArray())
-                    initTripTab()
-                }
-
-            })
-
-            tripsAdapter.setTravelList(selectedTripList)
-            binding.recyclerViewTripsBookmarks.adapter = tripsAdapter
-        } else
-            println("Shared Pref is empty")
     }
 
     private fun refreshData() {
         binding.apply {
             swipeRefreshLayout.setOnRefreshListener {
                 recyclerViewTripsBookmarks.hide()
-                tripLoading.hide()
-                initTripTab()
-                initTab()
+                progressBar.hide()
+                initTripPage()
+                initSelectedTab()
                 swipeRefreshLayout.isRefreshing = false
             }
-
         }
     }
 }
