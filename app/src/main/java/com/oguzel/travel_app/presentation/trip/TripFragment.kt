@@ -12,8 +12,11 @@ import com.google.android.material.tabs.TabLayout
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.databinding.FragmentTripBinding
 import com.oguzel.travel_app.domain.model.BookmarkRequestModel
+import com.oguzel.travel_app.domain.model.SelectedTripModel
+import com.oguzel.travel_app.presentation.TripBottomSheetFragment
 import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
+import com.oguzel.travel_app.utils.SharedPrefManager
 import com.oguzel.travel_app.utils.bookmarkCheckModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +26,8 @@ class TripFragment : Fragment() {
     private lateinit var binding: FragmentTripBinding
     private val viewModel: TripViewModel by viewModels()
     private var bookmarksAdapter: BookmarksAdapter = BookmarksAdapter(arrayListOf())
+    private lateinit var sharedPrefManager : SharedPrefManager
+    private var selectedTripList : MutableList<SelectedTripModel> = mutableListOf()
 
 
     override fun onCreateView(
@@ -37,13 +42,29 @@ class TripFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initTab()
+
+        binding.fobAddTrip.setOnClickListener {
+            openBottomSheet()
+        }
+
     }
 
     private fun initTab() {
         binding.tabLayoutTrips.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> {}
+                    0 -> {
+                        if(sharedPrefManager.ifContains(TripBottomSheetFragment.PATIKA) == true){
+                            println(sharedPrefManager.readDataString(TripBottomSheetFragment.PATIKA).toList())
+                            selectedTripList = sharedPrefManager.readDataString(
+                                TripBottomSheetFragment.PATIKA
+                            ).toMutableList()
+//                            bookmarksAdapter.setTravelList(selectedTripList)
+                            binding.recyclerViewTripsBookmarks.adapter = bookmarksAdapter
+                        }
+                        else
+                            println("Shared Pref is empty")
+                    }
                     1 -> {
                         fetchTravelInfo()
                         bookmarksAdapter.setOnItemClickListener(object :
@@ -97,4 +118,13 @@ class TripFragment : Fragment() {
             }
         }
     }
+
+    private fun openBottomSheet() {
+
+
+        val bottomSheetFragment = TripBottomSheetFragment()
+        bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+
+    }
+
 }

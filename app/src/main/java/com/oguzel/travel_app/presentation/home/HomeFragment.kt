@@ -36,8 +36,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchTravelInfo()
+        initHomeViews()
     }
-
 
     fun fetchTravelInfo() {
         viewModel.getTravelInfo().observe(viewLifecycleOwner) {
@@ -60,7 +60,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
 
     fun initTab(list: List<TravelModel>){
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -86,15 +85,34 @@ class HomeFragment : Fragment() {
                         binding.recyclerViewDeals.adapter = adapter
                     }
                 }
-
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
     }
 
+    fun initHomeViews(){
+        binding.apply {
+            flightHomeView.textView.text = context?.resources?.getText(R.string.flights)
+            flightHomeView.button.setIconResource(R.drawable.ic_flight)
+            flightHomeView.root.setOnClickListener {
+                Toast.makeText(requireContext(),"Flights",Toast.LENGTH_SHORT).show()
+            }
+            hotelsHomeView.textView.text = context?.resources?.getText(R.string.hotels)
+            hotelsHomeView.button.setIconResource(R.drawable.ic_hotels)
+            hotelsHomeView.root.setOnClickListener {
+                Toast.makeText(requireContext(),"Hotels",Toast.LENGTH_SHORT).show()
+            }
+            carsHomeView.textView.text = context?.resources?.getText(R.string.cars)
+            carsHomeView.button.setIconResource(R.drawable.ic_cars)
+            carsHomeView.root.setOnClickListener {
+                Toast.makeText(requireContext(),"Cars",Toast.LENGTH_SHORT).show()
+            }
+            taxiHomeView.textView.text = context?.resources?.getText(R.string.taxi)
+            taxiHomeView.button.setIconResource(R.drawable.ic_taxi)
+            taxiHomeView.root.setOnClickListener {
+                Toast.makeText(requireContext(),"Taxi",Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }

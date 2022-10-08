@@ -69,6 +69,21 @@ fun categorizeModel(categoryFilter: String, arrayList: List<TravelModel>)
     return tempArrayList
 }
 
+fun dropDownFilterModel(arrayList: List<TravelModel>)
+        : List<String> {
+    val tempArrayList = arrayListOf<String>()
+    arrayList.forEach { i ->
+        when (i.category) {
+            "topdestination" -> tempArrayList.add(i.title)
+            "nearby" -> tempArrayList.add(i.title)
+            "toppick" -> tempArrayList.add(i.title)
+            "mightneed" -> tempArrayList.add(i.title)
+            "hotel" -> tempArrayList.add(i.title)
+        }
+    }
+    return tempArrayList
+}
+
 fun searchModel(
     searchQuery : String,
     arrayList: List<TravelModel>

@@ -40,7 +40,7 @@
             app:lineHeight="@dimen/_32ssp" />
 
         <include
-            android:id="@+id/flight_home_button"
+            android:id="@+id/flight_home_view"
             layout="@layout/item_home_button"
             android:layout_width="@dimen/_54sdp"
             android:layout_height="@dimen/_80sdp"
@@ -50,7 +50,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <include
-            android:id="@+id/hotels_home_button"
+            android:id="@+id/hotels_home_view"
             layout="@layout/item_home_button"
             android:layout_width="@dimen/_54sdp"
             android:layout_height="@dimen/_80sdp"
@@ -60,7 +60,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <include
-            android:id="@+id/cars_home_button"
+            android:id="@+id/cars_home_view"
             layout="@layout/item_home_button"
             android:layout_width="@dimen/_54sdp"
             android:layout_height="@dimen/_80sdp"
@@ -70,7 +70,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <include
-            android:id="@+id/taxi_home_button"
+            android:id="@+id/taxi_home_view"
             layout="@layout/item_home_button"
             android:layout_width="@dimen/_54sdp"
             android:layout_height="@dimen/_80sdp"

@@ -10,4 +10,13 @@
     <string name="bookmark">Bookmark</string>
     <string name="trip_plan">Trip Plan</string>
     <string name="see_all"><u>See all</u></string>
+
+    <string name="flights">Flights</string>
+    <string name="hotels">Hotels</string>
+    <string name="cars">Cars</string>
+    <string name="taxi">Taxi</string>
+    <string name="choose_trip_location">Choose Trip Location</string>
+    <string name="choose_trip_date">Choose Trip Date</string>
+    <string name="save">Save</string>
+
 </resources>
