@@ -11,6 +11,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.oguzel.travel_app.R
+import com.oguzel.travel_app.data.local.sharedpref.model.SelectedTripModel
 import com.oguzel.travel_app.domain.model.TravelModel
 
 fun View.show() {
@@ -84,27 +85,51 @@ fun dropDownFilterModel(arrayList: List<TravelModel>)
     return tempArrayList
 }
 
-fun searchModel(
-    searchQuery : String,
-    arrayList: List<TravelModel>
-) : List<TravelModel>{
+fun findTravelModelByTitle( title : String ,arrayList: List<TravelModel>):List<TravelModel> {
     val tempArrayList = arrayListOf<TravelModel>()
-    arrayList.forEach { data ->
-        if(data.title.contains(searchQuery) || data.description.contains(searchQuery)) {
-            tempArrayList.add(data)
+    arrayList.forEach { i ->
+        when (i.title) {
+            title -> tempArrayList.add(i)
         }
     }
     return tempArrayList
+    }
+
+    fun searchModel(
+        searchQuery: String,
+        arrayList: List<TravelModel>
+    ): List<TravelModel> {
+        val tempArrayList = arrayListOf<TravelModel>()
+        arrayList.forEach { data ->
+            if (data.title.contains(searchQuery) || data.description.contains(searchQuery)) {
+                tempArrayList.add(data)
+            }
+        }
+        return tempArrayList
+    }
+
+    fun bookmarkCheckModel(
+        arrayList: List<TravelModel>
+    ): List<TravelModel> {
+        val tempArrayList = arrayListOf<TravelModel>()
+        arrayList.forEach { data ->
+            if (data.isBookmark) {
+                tempArrayList.add(data)
+            }
+        }
+        return tempArrayList
+    }
+
+fun removeTripModelByID(
+    id:String,
+    list: List<SelectedTripModel>
+): MutableList<SelectedTripModel> {
+    val tempList = mutableListOf<SelectedTripModel>()
+    list.forEach { i ->
+        if (i.travelModel.id != id) {
+            tempList.add(i)
+        }
+    }
+    return tempList
 }
 
-fun bookmarkCheckModel(
-    arrayList: List<TravelModel>
-) : List<TravelModel>{
-    val tempArrayList = arrayListOf<TravelModel>()
-    arrayList.forEach { data ->
-        if(data.isBookmark) {
-            tempArrayList.add(data)
-        }
-    }
-    return tempArrayList
-}

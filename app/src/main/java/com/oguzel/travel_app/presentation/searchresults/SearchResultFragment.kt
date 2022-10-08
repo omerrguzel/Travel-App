@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.oguzel.travel_app.R
+import com.oguzel.travel_app.data.local.room.SearchHistoryDatabase
+import com.oguzel.travel_app.data.local.room.model.SearchHistoryModel
 import com.oguzel.travel_app.databinding.FragmentSearchResultBinding
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.searchresults.adapter.SearchResultsAdapter
@@ -26,10 +28,11 @@ class SearchResultFragment : Fragment() {
     private var searchAdapter: SearchResultsAdapter = SearchResultsAdapter(arrayListOf())
     private lateinit var tempList: List<TravelModel>
     private val navArgs: SearchResultFragmentArgs by navArgs()
+    private var searchHistoryDatabase: SearchHistoryDatabase? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
         return binding.root
@@ -38,8 +41,12 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
         fetchTravelInfo()
         backButtonController()
+
+        val searchHistoryModel = SearchHistoryModel(id = 0, navArgs.searchQuery)
+        searchHistoryDatabase?.searchHistoryDao()?.insert(searchHistoryModel)
 
     }
 

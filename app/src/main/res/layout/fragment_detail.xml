@@ -53,16 +53,19 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewDetailImages"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
-                android:layout_marginStart="@dimen/_13sdp"
-                android:layout_marginEnd="@dimen/_13sdp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/imageViewDetail"
                 android:layout_alignEnd="@id/imageViewDetail"
                 android:layout_alignBottom="@id/imageViewDetail"
+                android:layout_marginStart="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/_13sdp"
                 android:layout_marginBottom="@dimen/_15sdp"
-                android:orientation="horizontal" />
+                android:background="@drawable/background_image_recyclerview"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </RelativeLayout>
 

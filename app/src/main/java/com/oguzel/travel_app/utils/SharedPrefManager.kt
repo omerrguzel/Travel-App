@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.oguzel.travel_app.domain.model.SelectedTripModel
+import com.oguzel.travel_app.data.local.sharedpref.model.SelectedTripModel
 
 
 class SharedPrefManager {

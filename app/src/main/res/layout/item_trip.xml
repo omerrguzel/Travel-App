@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="selectedTripModel"
+            type="com.oguzel.travel_app.data.local.sharedpref.model.SelectedTripModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewTrip"
+        android:layout_width="@dimen/_275sdp"
+        android:layout_height="@dimen/_154sdp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutItemTrip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewTrip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:downloadImageUrl="@{selectedTripModel.travelModel.imageInfoModels.get(0).url}"
+                android:scaleType="fitXY"
+                tools:ignore="contentDescription" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewTrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/imageViewTrip"
+                android:layout_alignTop="@id/imageViewTrip"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/background_textview_category"
+                android:padding="@dimen/_4sdp"
+                android:textColor="#FCFCFD"
+                tools:text="@{selectedTripModel.travelModel.category.toUpperCase()}" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonDeleteTrip"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignTop="@id/imageViewTrip"
+                android:layout_alignEnd="@id/imageViewTrip"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/background_button_bookmark"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:backgroundTint="@android:color/transparent"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconGravity="top"
+                app:iconTint="@color/pink" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutTitleTypeTrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewTitleTrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:gravity="center_vertical"
+                    android:lineHeight="@dimen/_24ssp"
+                    android:textAlignment="center"
+                    android:textColor="#FCFCFD"
+                    android:textFontWeight="700"
+                    android:textSize="@dimen/_19ssp"
+                    android:text="@{selectedTripModel.travelModel.title}"
+                    tools:ignore="RtlCompat"
+                    />
+
+                <TextView
+                    android:id="@+id/textViewTypeTrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:gravity="center_vertical"
+                    tools:text="Incoming Dates"
+                    android:textAlignment="center"
+                    android:textColor="#FCFCFD"
+                    tools:ignore="RtlCompat" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/imageViewTrip"
+                android:layout_marginBottom="@dimen/_11sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewImageAmountTrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_image_count"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableTint="#FF4760"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:gravity="left"
+                    android:lineHeight="@dimen/_20ssp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="#FCFCFD"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/_13ssp"
+                    tools:text="4 Images" />
+
+                <TextView
+                    android:id="@+id/textViewDurationTrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/ic_duration"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableTint="#FF4760"
+                    android:fontFamily="@font/source_sans_pro_regular"
+                    android:gravity="right"
+                    android:lineHeight="@dimen/_20ssp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="#FCFCFD"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/_13ssp"
+                    tools:text="5 days" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

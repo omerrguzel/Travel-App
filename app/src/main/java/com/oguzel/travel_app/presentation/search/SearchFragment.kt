@@ -11,10 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.oguzel.travel_app.R
+import com.oguzel.travel_app.data.local.room.SearchHistoryDatabase
+import com.oguzel.travel_app.data.local.room.model.SearchHistoryModel
 import com.oguzel.travel_app.databinding.FragmentSearchBinding
 import com.oguzel.travel_app.domain.model.BookmarkRequestModel
 import com.oguzel.travel_app.domain.model.TravelModel
-import com.oguzel.travel_app.presentation.home.HomeFragmentDirections
 import com.oguzel.travel_app.presentation.search.adapter.NearByAttractionsAdapter
 import com.oguzel.travel_app.presentation.search.adapter.TopDestinationsAdapter
 import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
@@ -30,6 +31,8 @@ class SearchFragment : Fragment() {
     private var topDestinationsAdapter: TopDestinationsAdapter = TopDestinationsAdapter(arrayListOf())
     private var nearByAttractionsAdapter : NearByAttractionsAdapter = NearByAttractionsAdapter(arrayListOf())
     private lateinit var tempList : List<TravelModel>
+    private var searchHistoryDatabase : SearchHistoryDatabase? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +45,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        searchHistoryDatabase  = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
+
         fetchTravelInfo()
 
         nearByAttractionsAdapter.setOnItemClickListener(object : BookmarksAdapter.IBookmarkClickListener{
@@ -49,11 +54,31 @@ class SearchFragment : Fragment() {
                 updateBookmark(id, BookmarkRequestModel(!isBookmark))
             }
         })
+
+        binding.buttonSearchHistory.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(SearchFragmentDirections.actionSearchFragmentToSearchHistoryFragment())
+        }
         binding.buttonSearchSearchScreen.setOnClickListener {
+
+            var result = ""
+
+            val searchedQueryList: ArrayList<SearchHistoryModel> =
+                searchHistoryDatabase?.searchHistoryDao()?.getSearchHistory() as ArrayList<SearchHistoryModel>
+
+            searchedQueryList.forEach {
+
+                println(it.searchedText+"\n")
+                result += it.searchedText
+
+            }
+
+
             Navigation.findNavController(it)
                 .navigate(SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(binding.editTextSearchSearchScreen.text.toString()))
         }
     }
+
 
     override fun onViewStateRestored(@Nullable savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)

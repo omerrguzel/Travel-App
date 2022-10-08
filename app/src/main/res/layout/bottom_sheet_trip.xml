@@ -15,6 +15,7 @@
             android:id="@+id/textViewChooseTripTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_13sdp"
             android:fontFamily="@font/source_sans_pro_bold"
@@ -47,6 +48,7 @@
             android:id="@+id/textViewChooseDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_29sdp"
             android:fontFamily="@font/source_sans_pro_bold"
@@ -55,68 +57,23 @@
             android:textSize="@dimen/_15ssp"
             app:layout_constraintTop_toBottomOf="@id/dropDownMenu" />
 
-        <LinearLayout
-            android:id="@+id/linearLayoutDatePicker"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/buttonDepartureDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_13sdp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/textViewChooseDate">
+            android:layout_marginTop="@dimen/_8sdp"
+            android:backgroundTint="#0048F0"
+            android:elevation="@dimen/_15sdp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="@dimen/_15sdp"
+            android:src="@drawable/ic_trip_calendar"
+            app:tint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewChooseDate" />
 
-            <LinearLayout
-                android:id="@+id/linearLayoutDepartureDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textViewDepartureDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Departure Date" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonDepartureDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:backgroundTint="#C2C5D6"
-                    android:hint="00/00/0000"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayoutArrivalDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textViewArrivalDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Arrival Date" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonArrivalDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:backgroundTint="#C2C5D6"
-                    android:hint="99/99/9999"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSave"
@@ -128,19 +85,7 @@
             android:text="@string/save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutDatePicker" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonRead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:backgroundTint="@color/pink"
-            android:layout_marginBottom="@dimen/_15sdp"
-            android:text="Read"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonSave" />
+            app:layout_constraintTop_toBottomOf="@id/buttonDepartureDate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
