@@ -26,7 +26,7 @@ class NearByAttractionsViewHolder(
                     top = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp),
                     bottom = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp))
                 layoutParams.width = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._275sdp)
-                layoutParams.height = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._117sdp)
+                layoutParams.height = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._155sdp)
                 setOnClickListener {
                     Navigation.findNavController(it)
                         .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(travelModel.id))

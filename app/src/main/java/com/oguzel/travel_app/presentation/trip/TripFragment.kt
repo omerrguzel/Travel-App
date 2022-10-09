@@ -69,9 +69,12 @@ class TripFragment : Fragment() {
                     initTripPage()
                 }
             })
+            binding.recyclerViewTripsBookmarks.show()
             tripsAdapter.setTravelList(selectedTripList)
             binding.recyclerViewTripsBookmarks.adapter = tripsAdapter
         }
+        else
+            binding.recyclerViewTripsBookmarks.hide()
     }
 
     private fun initSelectedTab() {

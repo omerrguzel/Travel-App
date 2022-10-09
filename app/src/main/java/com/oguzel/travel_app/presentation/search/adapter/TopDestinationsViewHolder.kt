@@ -25,29 +25,35 @@ class TopDestinationsViewHolder(
 
         binding.apply {
             setVariable(BR.travelModel, travelModel)
-            cardViewDeals.setMargins(left = 10, right = 10)
+
+            cardViewDeals.apply {
+                setMargins(
+                    left = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp),
+                    right = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp))
+                layoutParams.width = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._120sdp)
+                layoutParams.height = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._155sdp)
+                setOnClickListener {
+                    Navigation.findNavController(it)
+                        .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(travelModel.id))
+                }
+            }
+
+            textViewTitle.apply {
+                text = travelModel.city
+                setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    textViewTitle.context.resources.getDimension(R.dimen._12ssp)
+                )
+            }
+
+            textViewType.text = travelModel.country
+            imageViewDeals.scaleType = ImageView.ScaleType.CENTER_CROP
+
             textViewCategory.gone()
             buttonBookmark.gone()
             textViewImageAmount.gone()
             textViewDuration.gone()
-//            val newCity : ArrayList<String> = travelModel.city.split(", ").toTypedArray()
-//            textViewTitle.text = textViewTitle.toString().split(",").first()
-            linearLayoutTitleType.setMargins(bottom = 0)
-            textViewTitle.text = travelModel.city
-            textViewType.text = travelModel.country
-            imageViewDeals.scaleType = ImageView.ScaleType.CENTER_CROP
-            cardViewDeals.layoutParams.width = 150
-            cardViewDeals.layoutParams.height = 200
-            textViewTitle.textSize = 15F
-//            textViewTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, R.dimen._20ssp)
-//            cardViewDeals.layoutParams.width = R.dimen._152sdp
-//            cardViewDeals.layoutParams.height = R.dimen._117sdp
-
-            cardViewDeals.setOnClickListener {
-
-                Navigation.findNavController(it)
-                    .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(travelModel.id))
-            }
+//            linearLayoutTitleType.setMargins(bottom = 0)
         }
     }
 }

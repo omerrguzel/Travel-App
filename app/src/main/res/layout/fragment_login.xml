@@ -16,7 +16,7 @@
             android:id="@+id/LoginTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_130sdp"
+            android:layout_marginTop="@dimen/_110sdp"
             android:fontFamily="@font/inter"
             android:text="@string/welcome_back"
             android:textColor="@color/white"

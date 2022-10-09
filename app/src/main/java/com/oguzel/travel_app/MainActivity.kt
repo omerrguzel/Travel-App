@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.searchResultFragment -> bottomNavigationView.gone()
                 R.id.loginFragment ->bottomNavigationView.gone()
                 R.id.registerFragment -> bottomNavigationView.gone()
+                R.id.splashFragment -> bottomNavigationView.gone()
                 else -> bottomNavigationView.show()
             }
         }

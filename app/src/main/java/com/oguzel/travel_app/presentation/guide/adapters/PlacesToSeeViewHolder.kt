@@ -19,8 +19,21 @@ class PlacesToSeeViewHolder(
 
         binding.apply {
             setVariable(BR.travelModel, travelModel)
-            cardViewPlacesToSee.setMargins(left = 5, right = 5)
+            cardViewPlacesToSee.apply {
+                setMargins(
+                    left = context.resources.getDimensionPixelSize(R.dimen._4sdp),
+                    right = context.resources.getDimensionPixelSize(R.dimen._4sdp)
+                )
+                setOnClickListener {
 
+                    Navigation.findNavController(it)
+                        .navigate(
+                            GuideFragmentDirections.actionGuideFragmentToDetailFragment(
+                                travelModel.id
+                            )
+                        )
+                }
+            }
             if (travelModel.isBookmark) {
                 buttonBookmark.setIconResource(R.drawable.ic_bookmark_active)
                 buttonBookmark.setIconTintResource(R.color.pink)
