@@ -10,6 +10,7 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.oguzel.travel_app.databinding.ActivityMainBinding
+import com.oguzel.travel_app.utils.gone
 import com.oguzel.travel_app.utils.hide
 import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,8 +40,10 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.detailFragment -> bottomNavigationView.hide()
-                R.id.searchResultFragment -> bottomNavigationView.hide()
+                R.id.detailFragment -> bottomNavigationView.gone()
+                R.id.searchResultFragment -> bottomNavigationView.gone()
+                R.id.loginFragment ->bottomNavigationView.gone()
+                R.id.registerFragment -> bottomNavigationView.gone()
                 else -> bottomNavigationView.show()
             }
         }

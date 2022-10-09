@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "963140404767",
+    "project_id": "travel-app-by-omer",
+    "storage_bucket": "travel-app-by-omer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963140404767:android:36f596913289b82c58f72a",
+        "android_client_info": {
+          "package_name": "com.oguzel.travel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963140404767-i8kqe61q1h4jscv8n4qe6lkb5gfsuvkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0tiydPK2YYDriVyX8VmYQtSTZiKLYJ8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963140404767-i8kqe61q1h4jscv8n4qe6lkb5gfsuvkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

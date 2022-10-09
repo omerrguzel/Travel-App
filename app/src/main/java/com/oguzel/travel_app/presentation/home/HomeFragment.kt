@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.databinding.FragmentHomeBinding
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.home.adapter.HomeDealsAdapter
+import com.oguzel.travel_app.presentation.register.RegisterFragmentDirections
 import com.oguzel.travel_app.utils.Resource
 import com.oguzel.travel_app.utils.categorizeModel
 import com.oguzel.travel_app.utils.gone
@@ -39,6 +41,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fetchTravelInfo()
         initHomeButtons()
+        logOut()
     }
 
     private fun fetchTravelInfo() {
@@ -116,6 +119,15 @@ class HomeFragment : Fragment() {
             taxiHomeView.root.setOnClickListener {
                 Toast.makeText(requireContext(),"Taxi",Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+
+    private fun logOut(){
+        binding.buttonLogout.setOnClickListener{
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+            findNavController().navigate(action)
         }
     }
 }
