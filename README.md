@@ -28,11 +28,16 @@ Travel app is your guide on your journey around the world. You can discover new 
 
 | Register | Login | Home | Search | Trips | Bookmarks | Guide and Detail |
 | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
-|  <img src="https://user-images.githubusercontent.com/58399384/194958880-d0be5820-cd74-4d12-bafe-c0a227d47fc9.webm" width="250" height="500" /> | <img src="https://user-images.githubusercontent.com/58399384/194959361-397dc45f-ae33-4f0f-91e7-840f0f5ca22e.webm" width="250" height="500" /> | <img src="https://user-images.githubusercontent.com/58399384/194959747-8c1f7774-3fea-4a97-8fea-998fb455e88c.webm" width="250" height="500" /> |   <img src="https://user-images.githubusercontent.com/58399384/194960459-b6a83c35-07c3-45cd-acce-e407440700f8.webm" width="250" height="500" /> |   <img src="https://user-images.githubusercontent.com/58399384/194960475-232bbc15-ac93-49ee-8e8a-f1b330d976e6.webm" width="250" height="500" /> |   <img src="https://user-images.githubusercontent.com/58399384/194960515-a32e19cf-4e2c-44f8-9e13-de39530104d3.webm" width="250" height="500" /> |   <img src="https://user-images.githubusercontent.com/58399384/194960575-fd4cff89-e69a-4c55-8177-04d552f36202.webm" width="250" height="500" /> |
-
+|  <img src="https://user-images.githubusercontent.com/58399384/194963689-11cb34f3-781f-45b2-9f5b-2b53badde9f5.gif" width="250" height="540" /> | <img src="https://user-images.githubusercontent.com/58399384/194963721-bc549b4a-485d-424d-b05c-03f17febf090.gif" width="250" height="540" /> | <img src="https://user-images.githubusercontent.com/58399384/194964140-eec8e029-0129-43a9-84f2-294f4f13a0f6.gif" width="250" height="540" /> |   <img src="https://user-images.githubusercontent.com/58399384/194963777-d5db1cbc-e04f-4834-b6e0-f6146f2da176.gif" width="250" height="540" /> |   <img src="https://user-images.githubusercontent.com/58399384/194963796-61bce097-a397-48d5-b681-a89e2295c8f8.gif" width="250" height="540" /> |   <img src="https://user-images.githubusercontent.com/58399384/194963810-99c53217-73bf-4d7d-a553-7fdbce93ece7.gif" width="250" height="540" /> |   <img src="https://user-images.githubusercontent.com/58399384/194963826-1072c0a7-653e-464b-a797-d89394932fa6.gif" width="250" height="540" /> | 
 
 * First screen is splash screen which displays an animation
-
+* For login&register,Firebase is being used
+* Home screen stores deals adapter where you can categorize deals as flight,hotels and transportation
+* In addition to TopDestinations and Nearby Attractions, Search screen contains search bar where you can find items. Search bar navigates to Search Result and Search History screens. Search history data is being stored with RoomDB.
+* In Trip tab item of Trip Plan screen you can plan your next trip. Planned trip data is being stored with shared preferences.
+* In bookmark screen you can observe and remove your bookmarked items. Bookmark status of items are stored and updated in API.
+* Guide screen displays Must-See and Places To Go Before You Die categories
+* Detail screen displays items' images,location and description. Like search and guide screens you can (un)bookmark your item here too.
 
 ## Technologies Used
 
@@ -45,11 +50,13 @@ Travel app is your guide on your journey around the world. You can discover new 
 * Firebase
 * Shared Preferences
 * ViewModel - LiveData
+* Navigation Component
 * Databinding
 * Recyclerview
 * Glide
 * Lottie
-* Navigation
+* Datepicker
+
 
 
 ## Roadmap
