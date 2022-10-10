@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.data.local.room.SearchHistoryDatabase
-import com.oguzel.travel_app.data.local.room.model.SearchHistoryModel
 import com.oguzel.travel_app.databinding.FragmentSearchBinding
 import com.oguzel.travel_app.domain.model.BookmarkRequestModel
 import com.oguzel.travel_app.domain.model.TravelModel
@@ -18,7 +17,6 @@ import com.oguzel.travel_app.presentation.search.adapter.NearByAttractionsAdapte
 import com.oguzel.travel_app.presentation.search.adapter.TopDestinationsAdapter
 import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
-import com.oguzel.travel_app.utils.categorizeModel
 import com.oguzel.travel_app.utils.gone
 import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,9 +30,9 @@ class SearchFragment : Fragment() {
         TopDestinationsAdapter(arrayListOf())
     private var nearByAttractionsAdapter: NearByAttractionsAdapter =
         NearByAttractionsAdapter(arrayListOf())
-    private lateinit var tempList: List<TravelModel>
     private var searchHistoryDatabase: SearchHistoryDatabase? = null
-
+    private var topDestinationList: List<TravelModel> = emptyList()
+    private var nearByList: List<TravelModel> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,9 +44,10 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
 
-        fetchTravelInfo()
+        searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
+        fetchTravelInfoByCategory("topdestination")
+        fetchTravelInfoByCategory("nearby")
         navigateSearchHistory()
         navigateSearchResult()
     }
@@ -58,36 +57,43 @@ class SearchFragment : Fragment() {
         binding.editTextSearchSearchScreen.setText("")
     }
 
-    private fun fetchTravelInfo() {
-        viewModel.getTravelInfo().observe(viewLifecycleOwner) {
+    private fun fetchTravelInfoByCategory(category : String)  {
+        viewModel.getTravelInfoByCategory(category).observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     binding.progressBar.show()
+                    println("Loading Info")
                 }
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.gone()
-                    tempList = it.data!!
-                    this.topDestinationsAdapter.setTravelList(
-                        categorizeModel("topdestination", tempList)
-                    )
-                    binding.recyclerViewTopDestinations.adapter = topDestinationsAdapter
-
-                    nearByAttractionsAdapter.setTravelList(
-                        categorizeModel("nearby", tempList)
-                    )
-                    binding.recyclerViewNearbyAttractions.adapter = nearByAttractionsAdapter
-                    nearByAttractionsAdapter.setOnItemClickListener(object :
-                        BookmarksAdapter.IBookmarkClickListener {
-                        override fun changeBookmarkState(id: String, isBookmark: Boolean) {
-                            updateBookmark(id, BookmarkRequestModel(!isBookmark))
-                        }
-                    })
+                    if(category=="topdestination"){
+                        bindTopDestAdapter(it.data!!)
+                    }
+                    else if(category=="nearby"){
+                        bindNearByAdapter(it.data!!)
+                    }
                 }
                 Resource.Status.ERROR -> {
-                    println(it.message)
+                    println("Fetch Info Error : ${it.message}")
                 }
             }
         }
+    }
+
+    private fun bindTopDestAdapter(list: List<TravelModel>) {
+        topDestinationsAdapter.setTravelList(list)
+        binding.recyclerViewTopDestinations.adapter = topDestinationsAdapter
+    }
+
+    private fun bindNearByAdapter(list: List<TravelModel>) {
+        nearByAttractionsAdapter.setTravelList(list)
+        binding.recyclerViewNearbyAttractions.adapter = nearByAttractionsAdapter
+        nearByAttractionsAdapter.setOnItemClickListener(object :
+            BookmarksAdapter.IBookmarkClickListener {
+            override fun changeBookmarkState(id: String, isBookmark: Boolean) {
+                updateBookmark(id, BookmarkRequestModel(!isBookmark))
+            }
+        })
     }
 
     private fun updateBookmark(id: String, isBookmark: BookmarkRequestModel) {
@@ -98,7 +104,7 @@ class SearchFragment : Fragment() {
                 }
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.gone()
-                    fetchTravelInfo()
+                    fetchTravelInfoByCategory("nearby")
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)
@@ -107,7 +113,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun navigateSearchHistory(){
+    private fun navigateSearchHistory() {
         binding.buttonSearchHistory.setOnClickListener {
             Navigation.findNavController(it)
                 .navigate(SearchFragmentDirections.actionSearchFragmentToSearchHistoryFragment())

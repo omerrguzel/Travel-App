@@ -10,10 +10,13 @@ interface TravelRepository {
 
     suspend fun getTravelInfo(): Resource<ArrayList<TravelModel>>
 
+    suspend fun getTravelInfoByCategory(category : String) : Resource<ArrayList<TravelModel>>
+
     suspend fun getTravelById(id : String): Resource<TravelModel>
 
     suspend fun getGuideCategories() : Resource<ArrayList<CategoryModel>>
 
     suspend fun updateBookmark(id : String , bookmarkRequestModel: BookmarkRequestModel) : Resource<TravelModel>
 
+    suspend fun getBookmarkedTravelInfo() : Resource<ArrayList<TravelModel>>
 }

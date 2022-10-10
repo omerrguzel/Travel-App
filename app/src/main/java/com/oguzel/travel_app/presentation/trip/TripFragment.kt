@@ -12,6 +12,7 @@ import com.oguzel.travel_app.R
 import com.oguzel.travel_app.data.local.sharedpref.model.SelectedTripModel
 import com.oguzel.travel_app.databinding.FragmentTripBinding
 import com.oguzel.travel_app.domain.model.BookmarkRequestModel
+import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.presentation.trip.adapters.TripsAdapter
 import com.oguzel.travel_app.utils.*
@@ -78,6 +79,8 @@ class TripFragment : Fragment() {
     }
 
     private fun initSelectedTab() {
+        binding.recyclerViewTripsBookmarks.show()
+        binding.progressBar.gone()
         binding.tabLayoutTrips.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
@@ -102,16 +105,20 @@ class TripFragment : Fragment() {
         })
     }
 
+    fun bindBookmarkAdapter(list: List<TravelModel>){
+        bookmarksAdapter.setTravelList(list)
+        binding.recyclerViewTripsBookmarks.adapter = bookmarksAdapter
+    }
+
     fun fetchTravelInfo() {
-        viewModel.getTravelInfo().observe(viewLifecycleOwner) {
+        viewModel.getBookmarkedTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.gone()
-                    bookmarksAdapter.setTravelList(bookmarkCheckModel(it.data!!))
-                    binding.recyclerViewTripsBookmarks.adapter = bookmarksAdapter
+                    bindBookmarkAdapter(it.data!!)
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)
@@ -147,7 +154,9 @@ class TripFragment : Fragment() {
             swipeRefreshLayout.setOnRefreshListener {
                 recyclerViewTripsBookmarks.hide()
                 progressBar.hide()
-                initTripPage()
+                if(binding.tabLayoutTrips.selectedTabPosition==0){
+                    initTripPage()
+                }
                 initSelectedTab()
                 swipeRefreshLayout.isRefreshing = false
             }

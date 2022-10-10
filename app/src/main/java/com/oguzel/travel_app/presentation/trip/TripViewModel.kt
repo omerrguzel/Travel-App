@@ -24,4 +24,8 @@ class TripViewModel @Inject constructor(
     ): LiveData<Resource<TravelModel>> {
         return travelUseCase.updateBookmark(id, bookmarkRequestModel)
     }
+
+    fun getBookmarkedTravelInfo() : LiveData<Resource<ArrayList<TravelModel>>> {
+        return travelUseCase.getBookmarkedTravelInfo()
+    }
 }

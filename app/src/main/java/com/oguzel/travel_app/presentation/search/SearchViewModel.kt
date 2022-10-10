@@ -24,4 +24,8 @@ class SearchViewModel @Inject constructor(
     ): LiveData<Resource<TravelModel>> {
         return travelUseCase.updateBookmark(id, bookmarkRequestModel)
     }
+
+    fun getTravelInfoByCategory(category : String) : LiveData<Resource<ArrayList<TravelModel>>> {
+        return travelUseCase.getTravelInfoByCategory(category)
+    }
 }

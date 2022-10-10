@@ -15,8 +15,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.data.local.entity.User
 import com.oguzel.travel_app.databinding.FragmentRegisterBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
@@ -38,8 +39,6 @@ class RegisterFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         mFireStore = FirebaseFirestore.getInstance()
         init()
-
-
     }
 
     private fun init() {
@@ -47,11 +46,11 @@ class RegisterFragment : Fragment() {
             buttonRegister.setOnClickListener {
                 val email = editTextEmailRegister.text.toString()
                 if (email.isEmpty()) {
-                    editTextEmailRegister.error = "please enter your email"
+                    editTextEmailRegister.error = "Please enter your email"
                 }
                 val password = editTextPasswordRegister.text.toString()
                 if (password.isEmpty()) {
-                    editTextPasswordRegister.error = "please enter your password"
+                    editTextPasswordRegister.error = "Please enter your password"
                 }
                 val name = editTextFullNameRegister.text.toString()
                 if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -66,9 +65,7 @@ class RegisterFragment : Fragment() {
                             findNavController().navigate(action)
                         }
                     }.addOnFailureListener {
-                        println("not successful")
-                        println(it)
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        println("Firebase register error : ${it.message}")
                     }
                 }
             }

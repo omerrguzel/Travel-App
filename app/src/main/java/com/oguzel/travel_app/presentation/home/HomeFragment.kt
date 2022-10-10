@@ -14,9 +14,7 @@ import com.oguzel.travel_app.R
 import com.oguzel.travel_app.databinding.FragmentHomeBinding
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.home.adapter.HomeDealsAdapter
-import com.oguzel.travel_app.presentation.register.RegisterFragmentDirections
 import com.oguzel.travel_app.utils.Resource
-import com.oguzel.travel_app.utils.categorizeModel
 import com.oguzel.travel_app.utils.gone
 import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +25,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
     private var adapter: HomeDealsAdapter = HomeDealsAdapter(arrayListOf())
-    private lateinit var tempList : List<TravelModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,32 +36,33 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchTravelInfo()
+        fetchTravelInfoByCategory("flight|hotel|transportation")
+        initTab()
         initHomeButtons()
         logOut()
     }
 
-    private fun fetchTravelInfo() {
-        viewModel.getTravelInfo().observe(viewLifecycleOwner) {
+    private fun fetchTravelInfoByCategory(category : String)  {
+        viewModel.getTravelInfoByCategory(category).observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     binding.progressBar.show()
+                    println("Loading Info")
                 }
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.gone()
-                    tempList = it.data!!
-                    initTab()
-                    adapter.setTravelList((
-                            categorizeModel("flight",tempList)+
-                            categorizeModel("hotel",tempList)+
-                            categorizeModel("transportation",tempList)).shuffled())
-                    binding.recyclerViewDeals.adapter = adapter
+                    bindAdapter((it.data!!).shuffled())
                 }
                 Resource.Status.ERROR -> {
-                    println(it.message)
+                    println("Fetch Info Error : ${it.message}")
                 }
             }
         }
+    }
+
+    private fun bindAdapter(list : List<TravelModel>){
+        adapter.setTravelList(list)
+        binding.recyclerViewDeals.adapter=adapter
     }
 
     private fun initTab(){
@@ -72,23 +70,16 @@ class HomeFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){
                     0 -> {
-                        adapter.setTravelList((
-                                    categorizeModel("flight",tempList)+
-                                    categorizeModel("hotel",tempList)+
-                                    categorizeModel("transportation",tempList)).shuffled())
-                        binding.recyclerViewDeals.adapter = adapter
+                        fetchTravelInfoByCategory("flight|hotel|transportation")
                     }
                     1 -> {
-                        adapter.setTravelList(categorizeModel("flight",tempList))
-                        binding.recyclerViewDeals.adapter = adapter
+                        fetchTravelInfoByCategory("flight")
                     }
                     2 -> {
-                        adapter.setTravelList(categorizeModel("hotel",tempList))
-                        binding.recyclerViewDeals.adapter = adapter
+                        fetchTravelInfoByCategory("hotel")
                     }
                     3 -> {
-                        adapter.setTravelList(categorizeModel("transportation",tempList))
-                        binding.recyclerViewDeals.adapter = adapter
+                        fetchTravelInfoByCategory("transportation")
                     }
                 }
             }
@@ -121,7 +112,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
 
     private fun logOut(){
         binding.buttonLogout.setOnClickListener{

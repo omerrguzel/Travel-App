@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,9 +15,7 @@ import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.presentation.guide.adapters.GuideCategoriesAdapter
 import com.oguzel.travel_app.presentation.guide.adapters.MustSeeAdapter
 import com.oguzel.travel_app.presentation.guide.adapters.PlacesToSeeAdapter
-import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 import com.oguzel.travel_app.utils.Resource
-import com.oguzel.travel_app.utils.categorizeModel
 import com.oguzel.travel_app.utils.gone
 import com.oguzel.travel_app.utils.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,32 +23,33 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class GuideFragment : Fragment() {
 
-    private lateinit var binding : FragmentGuideBinding
-    private val guideViewModel : GuideViewModel by viewModels()
+    private lateinit var binding: FragmentGuideBinding
+    private val guideViewModel: GuideViewModel by viewModels()
     private var mustSeeAdapter: MustSeeAdapter = MustSeeAdapter(arrayListOf())
-    private var placesToSeeAdapter : PlacesToSeeAdapter = PlacesToSeeAdapter(arrayListOf())
-    private var guideCategoriesAdapter : GuideCategoriesAdapter = GuideCategoriesAdapter(arrayListOf())
-    private lateinit var tempList : List<TravelModel>
+    private var placesToSeeAdapter: PlacesToSeeAdapter = PlacesToSeeAdapter(arrayListOf())
+    private var guideCategoriesAdapter: GuideCategoriesAdapter =
+        GuideCategoriesAdapter(arrayListOf())
+    private var mightNeedList: List<TravelModel> = emptyList()
+    private var placesToSeeList: List<TravelModel> = emptyList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_guide, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_guide, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        fetchTravelInfo()
+        initView()
+        fetchMustSeeInfo()
+        fetchPlacesToSeeInfo()
         fetchCategoryInfo()
-        placesToSeeAdapter.setOnItemClickListener(object : PlacesToSeeAdapter.IBookmarkClickListener{
-            override fun changeBookmarkState(id: String, isBookmark: Boolean) {
-                updateBookmark(id, BookmarkRequestModel(!isBookmark))
-            }
-        })
+    }
 
+    private fun initView() {
         binding.editTextSearchGuideScreen.text = null
         binding.buttonSearchGuideScreen.setOnClickListener {
             Navigation.findNavController(it)
@@ -60,29 +57,21 @@ class GuideFragment : Fragment() {
         }
     }
 
-    override fun onViewStateRestored(@Nullable savedInstanceState: Bundle?) {
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         binding.editTextSearchGuideScreen.setText("")
     }
 
-    private fun fetchTravelInfo() {
-        guideViewModel.getTravelInfo().observe(viewLifecycleOwner) {
+    private fun fetchMustSeeInfo() {
+        guideViewModel.getTravelInfoByCategory("mightneed").observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.gone()
-                    tempList = it.data!!
-                    this.mustSeeAdapter.setTravelList(
-                        categorizeModel("mightneed",tempList)
-                    )
-                    binding.recyclerViewMightNeedThese.adapter = mustSeeAdapter
-
-                    placesToSeeAdapter.setTravelList(
-                        categorizeModel("toppick",tempList)
-                    )
-                    binding.recyclerViewPlacesToGo.adapter = placesToSeeAdapter
+                    mightNeedList = it.data!!
+                    bindMustSeeAdapter()
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)
@@ -90,6 +79,41 @@ class GuideFragment : Fragment() {
             }
         }
     }
+
+    private fun fetchPlacesToSeeInfo() {
+        guideViewModel.getTravelInfoByCategory("toppick").observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    binding.progressBar.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
+                    placesToSeeList = it.data!!
+                    bindPlacesToSeeAdapter()
+                }
+                Resource.Status.ERROR -> {
+                    println(it.message)
+                }
+            }
+        }
+    }
+
+    private fun bindMustSeeAdapter() {
+        mustSeeAdapter.setTravelList(mightNeedList)
+        binding.recyclerViewMightNeedThese.adapter = mustSeeAdapter
+    }
+
+    private fun bindPlacesToSeeAdapter() {
+        placesToSeeAdapter.setTravelList(placesToSeeList)
+        binding.recyclerViewPlacesToGo.adapter = placesToSeeAdapter
+        placesToSeeAdapter.setOnItemClickListener(object :
+            PlacesToSeeAdapter.IBookmarkClickListener {
+            override fun changeBookmarkState(id: String, isBookmark: Boolean) {
+                updateBookmark(id, BookmarkRequestModel(!isBookmark))
+            }
+        })
+    }
+
 
     private fun fetchCategoryInfo() {
         guideViewModel.getGuideCategories().observe(viewLifecycleOwner) {
@@ -109,15 +133,15 @@ class GuideFragment : Fragment() {
         }
     }
 
-    private fun updateBookmark(id : String, isBookmark: BookmarkRequestModel) {
-        guideViewModel.updateBookmark(id , isBookmark).observe(viewLifecycleOwner) {
+    private fun updateBookmark(id: String, isBookmark: BookmarkRequestModel) {
+        guideViewModel.updateBookmark(id, isBookmark).observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.gone()
-                    fetchTravelInfo()
+                    fetchPlacesToSeeInfo()
                 }
                 Resource.Status.ERROR -> {
                     println(it.message)

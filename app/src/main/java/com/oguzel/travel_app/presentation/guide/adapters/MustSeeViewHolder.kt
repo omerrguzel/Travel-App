@@ -28,8 +28,8 @@ class MustSeeViewHolder(
                     left = context.resources.getDimensionPixelSize(R.dimen._7sdp),
                     right = context.resources.getDimensionPixelSize(R.dimen._7sdp)
                 )
-                layoutParams.width = context.resources.getDimensionPixelSize(R.dimen._85sdp)
-                layoutParams.height = context.resources.getDimensionPixelSize(R.dimen._96sdp)
+                layoutParams.width = context.resources.getDimensionPixelSize(R.dimen._100sdp)
+                layoutParams.height = context.resources.getDimensionPixelSize(R.dimen._120sdp)
                 setOnClickListener {
 
                     Navigation.findNavController(it)

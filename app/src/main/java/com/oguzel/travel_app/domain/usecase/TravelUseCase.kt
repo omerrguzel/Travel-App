@@ -9,10 +9,19 @@ import javax.inject.Inject
 class TravelUseCase @Inject constructor(
     private val travelRepository: TravelRepository
 ) {
-
     fun getTravelInfo() =
         performNetworkOperation {
             travelRepository.getTravelInfo()
+        }
+
+    fun getBookmarkedTravelInfo() =
+        performNetworkOperation {
+            travelRepository.getBookmarkedTravelInfo()
+        }
+
+    fun getTravelInfoByCategory(category: String) =
+        performNetworkOperation {
+            travelRepository.getTravelInfoByCategory(category)
         }
 
     fun getTravelById(id: String) =
@@ -25,8 +34,8 @@ class TravelUseCase @Inject constructor(
             travelRepository.getGuideCategories()
         }
 
-    fun updateBookmark(id : String , bookmarkRequestModel: BookmarkRequestModel) =
+    fun updateBookmark(id: String, bookmarkRequestModel: BookmarkRequestModel) =
         performNetworkOperation {
-            travelRepository.updateBookmark(id , bookmarkRequestModel)
+            travelRepository.updateBookmark(id, bookmarkRequestModel)
         }
-    }
+}

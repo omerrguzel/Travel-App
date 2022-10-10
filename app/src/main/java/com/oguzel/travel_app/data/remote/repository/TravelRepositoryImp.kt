@@ -15,6 +15,14 @@ class TravelRepositoryImp @Inject constructor(
         return remoteDataSource.getTravelInfo()
     }
 
+    override suspend fun getBookmarkedTravelInfo() : Resource<ArrayList<TravelModel>> {
+        return remoteDataSource.getBookmarkedTravelInfo()
+    }
+
+    override suspend fun getTravelInfoByCategory(category : String) : Resource<ArrayList<TravelModel>> {
+        return remoteDataSource.getTravelInfoByCategory(category)
+    }
+
     override suspend fun getTravelById(id: String): Resource<TravelModel> {
         return remoteDataSource.getRestaurantById(id)
     }
@@ -26,8 +34,4 @@ class TravelRepositoryImp @Inject constructor(
     override suspend fun updateBookmark(id : String , bookmarkRequestModel: BookmarkRequestModel): Resource<TravelModel> {
         return remoteDataSource.updateBookmark(id , bookmarkRequestModel)
     }
-//
-//    override suspend fun updateBookmark(isBookmark : Boolean): Resource<TravelModel> {
-//        return remoteDataSource.updateBookmark(isBookmark)
-//    }
 }
