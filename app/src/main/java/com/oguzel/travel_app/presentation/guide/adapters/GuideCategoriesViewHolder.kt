@@ -18,7 +18,10 @@ class GuideCategoriesViewHolder(
         binding.apply {
             setVariable(BR.categoryModel, categoryModel)
 
-            chipItem.setMargins(left = 5, right = 5)
+            chipItem.setMargins(
+                left = chipItem.context.resources.getDimensionPixelSize(R.dimen._4sdp),
+                right = chipItem.context.resources.getDimensionPixelSize(R.dimen._4sdp)
+            )
             when (categoryModel.icon) {
                 "taxi" -> chipItem.setChipIconResource(R.drawable.ic_taxi)
                 "rentcar" -> chipItem.setChipIconResource(R.drawable.ic_cars)

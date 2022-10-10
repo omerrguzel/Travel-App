@@ -13,8 +13,8 @@
         android:id="@+id/cardViewTrip"
         android:layout_width="@dimen/_275sdp"
         android:layout_height="@dimen/_154sdp"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="10dp"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardElevation="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -43,7 +43,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/background_textview_category"
                 android:padding="@dimen/_4sdp"
-                android:textColor="#FCFCFD"
+                android:textColor="@color/item_white"
                 tools:text="@{selectedTripModel.travelModel.category.toUpperCase()}" />
 
             <com.google.android.material.button.MaterialButton
@@ -78,7 +78,7 @@
                     android:gravity="center_vertical"
                     android:lineHeight="@dimen/_24ssp"
                     android:textAlignment="center"
-                    android:textColor="#FCFCFD"
+                    android:textColor="@color/item_white"
                     android:textFontWeight="700"
                     android:textSize="@dimen/_19ssp"
                     android:text="@{selectedTripModel.travelModel.title}"
@@ -110,34 +110,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_image_count"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:drawableTint="#FF4760"
                     android:fontFamily="@font/source_sans_pro_regular"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:lineHeight="@dimen/_20ssp"
                     android:paddingStart="@dimen/_10sdp"
-                    android:textColor="#FCFCFD"
+                    android:textColor="@color/item_white"
                     android:textFontWeight="400"
                     android:textSize="@dimen/_13ssp"
-                    tools:text="4 Images" />
+                    tools:text="4 Images"
+                    app:drawableLeftCompat="@drawable/ic_image_count"
+                    app:drawableTint="@color/pink"
+                    tools:ignore="RtlSymmetry" />
 
                 <TextView
                     android:id="@+id/textViewDurationTrip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableRight="@drawable/ic_duration"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:drawableTint="#FF4760"
                     android:fontFamily="@font/source_sans_pro_regular"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:lineHeight="@dimen/_20ssp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:textColor="#FCFCFD"
+                    android:textColor="@color/item_white"
                     android:textFontWeight="400"
                     android:textSize="@dimen/_13ssp"
-                    tools:text="5 days" />
+                    tools:text="5 days"
+                    app:drawableRightCompat="@drawable/ic_duration"
+                    app:drawableTint="@color/pink"
+                    tools:ignore="RtlSymmetry" />
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

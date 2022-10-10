@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -33,6 +32,9 @@ class LoginFragment : Fragment() {
         init()
     }
 
+    /**
+     * For login function Firebase is being used.
+     */
     private fun init() {
         auth = FirebaseAuth.getInstance()
         binding.apply {

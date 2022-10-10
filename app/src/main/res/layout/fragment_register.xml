@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -43,7 +42,8 @@
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/RegisterTitle"
+            android:autofillHints="name" />
 
 
         <EditText
@@ -62,7 +62,8 @@
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFullNameRegister" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextFullNameRegister"
+            android:autofillHints="emailAddress" />
 
         <EditText
             android:id="@+id/editTextPasswordRegister"
@@ -81,7 +82,8 @@
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister"
+            android:importantForAutofill="no" />
         
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewRegisterInfo"

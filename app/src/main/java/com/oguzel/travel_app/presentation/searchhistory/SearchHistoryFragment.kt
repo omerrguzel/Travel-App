@@ -40,12 +40,19 @@ class SearchHistoryFragment : Fragment() {
         deleteSearchHistory()
     }
 
+    /**
+     * To navigate to previous screen
+     */
     private fun backButtonController() {
         binding.buttonBackSearchResults.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
+    /**
+     * fetchHistory() fetches previously searched query list which is stored with RoomDB and binds
+     * it to adapter
+     */
     private fun fetchHistory() {
         searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
 
@@ -59,6 +66,10 @@ class SearchHistoryFragment : Fragment() {
         binding.recyclerViewSearchHistory.show()
     }
 
+    /**
+     * deleteSearchHistory() deletes stored previously searched query list
+     *
+     */
     private fun deleteSearchHistory() {
         binding.buttonDeleteAll.setOnClickListener {
             searchedQueryList.forEach { i ->

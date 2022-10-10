@@ -12,16 +12,6 @@
         android:layout_height="match_parent"
         tools:context=".presentation.search.SearchFragment">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/textViewSearch"
             android:layout_width="wrap_content"
@@ -29,8 +19,8 @@
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_25sdp"
             android:fontFamily="@font/source_sans_pro_bold"
-            android:text="Search"
-            android:textColor="#292C3D"
+            android:text="@string/search"
+            android:textColor="@color/page_title_color"
             android:textFontWeight="700"
             android:textSize="@dimen/_23ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,28 +45,31 @@
                 android:id="@+id/buttonSearchHistory"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="5dp"
+                android:padding="@dimen/_4sdp"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_recent_history"
-                app:tint="@color/pink" />
+                app:tint="@color/pink"
+                tools:ignore="ContentDescription" />
 
 
             <EditText
                 android:id="@+id/editTextSearchSearchScreen"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_40sdp"
+                android:layout_weight="19"
                 android:fontFamily="@font/source_sans_pro_regular"
-                android:hint="Where next?"
+                android:hint="@string/where_next"
                 android:importantForAutofill="no"
+                android:inputType="text"
                 android:lineHeight="@dimen/_17ssp"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingTop="@dimen/_8sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_8sdp"
-                android:textColorHint="#52577A"
+                android:textColorHighlight="@android:color/transparent"
+                android:textColorHint="@color/search_hint_color"
+                android:textColorLink="@android:color/transparent"
                 android:textFontWeight="400"
-                android:layout_weight="19"
                 android:textSize="@dimen/_13ssp" />
             <ImageView
                 android:id="@+id/buttonSearchSearchScreen"
@@ -84,7 +77,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_8sdp"
-                android:src="@drawable/ic_search_edittext"/>
+                android:src="@drawable/ic_search_edittext"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
 
@@ -97,8 +91,8 @@
             android:fontFamily="@font/source_sans_pro_semibold"
             android:letterSpacing="-0.03"
             android:lineHeight="@dimen/_21ssp"
-            android:text="TOP DESTINATIONS"
-            android:textColor="#292C3D"
+            android:text="@string/top_destinations"
+            android:textColor="@color/page_title_color"
             android:textFontWeight="600"
             android:textSize="@dimen/_17ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,8 +103,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewMustSee" />
@@ -124,8 +118,8 @@
             android:fontFamily="@font/source_sans_pro_semibold"
             android:letterSpacing="-0.03"
             android:lineHeight="@dimen/_21ssp"
-            android:text="NEARBY ATTRACTIONS"
-            android:textColor="#292C3D"
+            android:text="@string/nearby_attractions"
+            android:textColor="@color/page_title_color"
             android:textFontWeight="600"
             android:textSize="@dimen/_17ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,6 +138,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewNearbyAttractions" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

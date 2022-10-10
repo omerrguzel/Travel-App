@@ -17,16 +17,6 @@
         android:layout_height="match_parent"
         tools:context=".presentation.detail.DetailFragment">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <RelativeLayout
             android:id="@+id/relativeLayoutDetailImage"
             android:layout_width="match_parent"
@@ -103,15 +93,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_3sdp"
-            android:drawableStart="@drawable/ic_pin"
             android:fontFamily="@font/montserrat_light"
             android:lineHeight="@dimen/_38ssp"
             android:text="@{travelModel.city +','+travelModel.country}"
-            android:textColor="#0A2753"
+            android:textColor="@color/location_text_color"
             android:textFontWeight="300"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintStart_toStartOf="@+id/textViewDetailTitle"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDetailTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetailTitle"
+            app:drawableStartCompat="@drawable/ic_pin" />
 
         <LinearLayout
             android:id="@+id/linearLayoutDetailDescription"
@@ -128,7 +118,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
-                android:scrollbars="vertical">
+                android:scrollbars="vertical"
+                tools:ignore="UselessParent">
 
                 <TextView
                     android:id="@+id/textViewDetailDescription"
@@ -137,7 +128,7 @@
                     android:fontFamily="@font/montserrat_light"
                     android:lineHeight="@dimen/_21ssp"
                     android:text="@{travelModel.description}"
-                    android:textColorLink="#39414B"
+                    android:textColorLink="@color/description_text_color"
                     android:textSize="@dimen/_13ssp" />
             </ScrollView>
         </LinearLayout>
@@ -147,15 +138,25 @@
             android:layout_width="@dimen/_258sdp"
             android:layout_height="@dimen/_45sdp"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="Add Bookmark"
+            android:text="@string/add_bookmark"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
-            app:backgroundTint="#FF4760"
-            app:cornerRadius="8dp"
+            app:backgroundTint="@color/pink"
+            app:cornerRadius="@dimen/_6sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutDetailDescription" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -13,8 +12,7 @@
         android:gravity="start"
         android:fontFamily="@font/montserrat_light"
         android:textSize="@dimen/_16ssp"
-        android:padding="@dimen/_5sdp"
-        android:text="Travel Model Title">
+        android:padding="@dimen/_5sdp">
 
     </com.google.android.material.textview.MaterialTextView>
 </layout>

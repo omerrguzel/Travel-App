@@ -3,16 +3,6 @@ package com.oguzel.travel_app.utils
 import com.oguzel.travel_app.data.local.sharedpref.model.SelectedTripModel
 import com.oguzel.travel_app.domain.model.TravelModel
 
-fun categorizeModel(categoryFilter: String, arrayList: List<TravelModel>): List<TravelModel> {
-    val tempArrayList = arrayListOf<TravelModel>()
-    arrayList.forEach { i ->
-        when (i.category) {
-            categoryFilter -> tempArrayList.add(i)
-        }
-    }
-    return tempArrayList
-}
-
 fun dropDownFilterModel(arrayList: List<TravelModel>): List<String> {
     val tempArrayList = arrayListOf<String>()
     arrayList.forEach { i ->
@@ -43,18 +33,6 @@ fun searchModel(
     val tempArrayList = arrayListOf<TravelModel>()
     arrayList.forEach { data ->
         if (data.title.contains(searchQuery) || data.description.contains(searchQuery)) {
-            tempArrayList.add(data)
-        }
-    }
-    return tempArrayList
-}
-
-fun bookmarkCheckModel(
-    arrayList: List<TravelModel>
-): List<TravelModel> {
-    val tempArrayList = arrayListOf<TravelModel>()
-    arrayList.forEach { data ->
-        if (data.isBookmark) {
             tempArrayList.add(data)
         }
     }

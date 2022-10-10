@@ -8,7 +8,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.domain.model.TravelModel
-import com.oguzel.travel_app.presentation.home.adapter.HomeDealsViewHolder
 
 class TopDestinationsAdapter(
     private var travelList: ArrayList<TravelModel> = ArrayList(),
@@ -30,7 +29,7 @@ class TopDestinationsAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setTravelList(travelList: List<TravelModel>){
+    fun setTravelList(travelList: List<TravelModel>) {
         this.travelList.clear()
         this.travelList.addAll(travelList)
         notifyDataSetChanged()

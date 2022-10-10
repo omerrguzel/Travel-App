@@ -12,16 +12,6 @@
         android:layout_height="match_parent"
         tools:context=".presentation.guide.GuideFragment">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/textViewGuide"
             android:layout_width="wrap_content"
@@ -29,8 +19,8 @@
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_25sdp"
             android:fontFamily="@font/source_sans_pro_bold"
-            android:text="Guide"
-            android:textColor="#292C3D"
+            android:text="@string/guide"
+            android:textColor="@color/page_title_color"
             android:textFontWeight="700"
             android:textSize="@dimen/_23ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,8 +36,8 @@
             android:fontFamily="@font/source_sans_pro_semibold"
             android:letterSpacing="-0.03"
             android:lineHeight="@dimen/_21ssp"
-            android:text="MUST SEE"
-            android:textColor="#292C3D"
+            android:text="@string/must_see"
+            android:textColor="@color/page_title_color"
             android:textFontWeight="600"
             android:textSize="@dimen/_17ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +51,7 @@
             android:fontFamily="@font/source_sans_pro_semibold"
             android:lineHeight="@dimen/_15ssp"
             android:text="@string/see_all"
-            android:textColor="#FF4760"
+            android:textColor="@color/pink"
             app:layout_constraintBottom_toBottomOf="@+id/textViewMustSee"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -93,26 +83,29 @@
 
             <EditText
                 android:id="@+id/editTextSearchGuideScreen"
-                android:layout_centerVertical="true"
                 android:layout_width="@dimen/_255sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:fontFamily="@font/source_sans_pro_regular"
-                android:hint="Where next?"
+                android:hint="@string/where_next"
                 android:importantForAutofill="no"
+                android:inputType="text"
                 android:lineHeight="@dimen/_17ssp"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingTop="@dimen/_8sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_8sdp"
-                android:textColorHint="#52577A"
+                android:textColorHighlight="@android:color/transparent"
+                android:textColorHint="@color/search_hint_color"
+                android:textColorLink="@android:color/transparent"
                 android:textFontWeight="400"
                 android:textSize="@dimen/_13ssp" />
             <ImageView
                 android:id="@+id/buttonSearchGuideScreen"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
-                android:src="@drawable/ic_search_edittext"/>
+                android:padding="@dimen/_4sdp"
+                android:src="@drawable/ic_search_edittext"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -135,8 +128,8 @@
             android:fontFamily="@font/source_sans_pro_semibold"
             android:letterSpacing="-0.03"
             android:lineHeight="@dimen/_21ssp"
-            android:text="PLACES TO GO BEFORE YOU DIE"
-            android:textColor="#292C3D"
+            android:text="@string/places_to_go_before_you_die"
+            android:textColor="@color/page_title_color"
             android:textFontWeight="600"
             android:textSize="@dimen/_17ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,6 +145,16 @@
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTopPickArticles" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

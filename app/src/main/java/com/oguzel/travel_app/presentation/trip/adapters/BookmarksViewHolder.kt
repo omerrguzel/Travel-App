@@ -14,9 +14,14 @@ import com.oguzel.travel_app.utils.gone
 import com.oguzel.travel_app.utils.setMargins
 
 class BookmarksViewHolder(
-    private val travelBinding: ViewDataBinding,
-    mListener: BookmarksAdapter.IBookmarkClickListener
+    private val travelBinding: ViewDataBinding
 ) : RecyclerView.ViewHolder(travelBinding.root) {
+
+    /**
+     * BookmarksAdapter uses item_deals layout for each item. In this function we are
+     * defining attributes of this item as desired. Additionally we are using a click listener to
+     * communicate fragment with adapter.
+     */
     fun onBind(travelModel: TravelModel, mListener: BookmarksAdapter.IBookmarkClickListener) {
         val binding = travelBinding as ItemDealsBinding
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -55,7 +54,8 @@
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewInfo"
+            android:autofillHints="emailAddress" />
 
         <EditText
             android:id="@+id/editTextPasswordLogin"
@@ -74,7 +74,8 @@
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/buttonLogin"

@@ -44,8 +44,10 @@ class TripFragment : Fragment() {
 
     }
 
+    /**
+     * initTripPage() reads stored all selectedTripModels from sharedPref and binds it to adapter.
+     */
     private fun initTripPage() {
-
         sharedPrefManager = SharedPrefManager(this.requireActivity())
         binding.apply {
             fobAddTrip.show()
@@ -78,6 +80,7 @@ class TripFragment : Fragment() {
             binding.recyclerViewTripsBookmarks.hide()
     }
 
+
     private fun initSelectedTab() {
         binding.recyclerViewTripsBookmarks.show()
         binding.progressBar.gone()
@@ -105,7 +108,7 @@ class TripFragment : Fragment() {
         })
     }
 
-    fun bindBookmarkAdapter(list: List<TravelModel>){
+    private fun bindBookmarkAdapter(list: List<TravelModel>){
         bookmarksAdapter.setTravelList(list)
         binding.recyclerViewTripsBookmarks.adapter = bookmarksAdapter
     }

@@ -1,7 +1,6 @@
 package com.oguzel.travel_app.presentation.detail.adapter
 
 import android.annotation.SuppressLint
-import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,16 +8,15 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.domain.model.ImageInfoModel
-import com.oguzel.travel_app.presentation.trip.adapters.BookmarksAdapter
 
 
 class ImagesAdapter(
     private var imageList: ArrayList<ImageInfoModel> = ArrayList(),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var mListener : ImagesAdapter.IImageClickListener
+    private lateinit var mListener: IImageClickListener
 
-    fun setOnItemClickListener(mListener : ImagesAdapter.IImageClickListener){
+    fun setOnItemClickListener(mListener: IImageClickListener) {
         this.mListener = mListener
     }
 
@@ -26,11 +24,11 @@ class ImagesAdapter(
         val travelBinding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), R.layout.item_detail_image, parent, false
         )
-        return ImagesViewHolder(travelBinding,mListener)
+        return ImagesViewHolder(travelBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ImagesViewHolder).onBind(imageList[position],mListener)
+        (holder as ImagesViewHolder).onBind(imageList[position], mListener)
 
     }
 
@@ -45,8 +43,7 @@ class ImagesAdapter(
         notifyDataSetChanged()
     }
 
-    interface IImageClickListener{
+    interface IImageClickListener {
         fun changeImage(imageInfoModel: ImageInfoModel)
     }
-
 }

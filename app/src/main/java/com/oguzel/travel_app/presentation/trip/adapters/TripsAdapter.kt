@@ -24,7 +24,7 @@ class TripsAdapter(
         val travelBinding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), R.layout.item_trip, parent, false
         )
-        return TripsViewHolder(travelBinding,mListener)
+        return TripsViewHolder(travelBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

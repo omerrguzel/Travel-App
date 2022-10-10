@@ -10,8 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#4DFCFCFD"
-        android:backgroundTint="#4DFCFCFD"
         tools:context=".presentation.home.HomeFragment">
 
         <ImageView
@@ -23,7 +21,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/buttonLogout"
@@ -33,7 +32,8 @@
             android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_baseline_logout_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -106,9 +106,9 @@
             android:layout_marginStart="@dimen/_17sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/source_sans_pro_semibold"
-            android:text="Deals"
+            android:text="@string/deals"
             android:textAllCaps="true"
-            android:textColor="#181A25"
+            android:textColor="@color/deals_text_color"
             android:textFontWeight="600"
             android:textSize="@dimen/_17ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,35 +124,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDeals"
             app:tabGravity="center"
-            app:tabIndicatorColor="#FF4760"
+            app:tabIndicatorColor="@color/pink"
             app:tabMode="auto"
-            app:tabSelectedTextColor="#FF4760"
+            app:tabSelectedTextColor="@color/pink"
             app:tabTextAppearance="@style/tab_text_home"
-            app:tabTextColor="#C2C5D6">
+            app:tabTextColor="@color/title_grey">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItemAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="All" />
+                android:text="@string/all" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItemFlights"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Flights" />
+                android:text="@string/flights" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItemHotels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hotels" />
+                android:text="@string/hotels" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItemTransportations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Transportations" />
+                android:text="@string/transportations" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.recyclerview.widget.RecyclerView

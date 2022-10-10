@@ -35,7 +35,7 @@
             app:icon="@drawable/ic_back_button"
             app:iconGravity="top"
             app:iconSize="@dimen/_30sdp"
-            app:iconTint="#FF4760"
+            app:iconTint="@color/pink"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,8 +60,8 @@
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_49sdp"
             android:fontFamily="@font/source_sans_pro_bold"
-            android:text="Search History"
-            android:textColor="#292C3D"
+            android:text="@string/search_history"
+            android:textColor="@color/page_title_color"
             android:textFontWeight="700"
             android:textSize="@dimen/_23ssp"
             app:layout_constraintStart_toStartOf="parent"

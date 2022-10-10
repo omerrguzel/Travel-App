@@ -13,10 +13,15 @@ import com.oguzel.travel_app.utils.gone
 import com.oguzel.travel_app.utils.setMargins
 
 class NearByAttractionsViewHolder(
-    private val travelBinding: ViewDataBinding,
-    mListener: BookmarksAdapter.IBookmarkClickListener
+    private val travelBinding: ViewDataBinding
 ) : RecyclerView.ViewHolder(travelBinding.root) {
-    fun onBind(travelModel : TravelModel,mListener: BookmarksAdapter.IBookmarkClickListener) {
+
+    /**
+     * NearByAttractionsAdapter uses item_deals layout for each item. In this function we are
+     * defining attributes of this item as desired. Additionally we are using a click listener to
+     * communicate fragment with adapter.
+     */
+    fun onBind(travelModel: TravelModel, mListener: BookmarksAdapter.IBookmarkClickListener) {
         val binding = travelBinding as ItemDealsBinding
 
         binding.apply {
@@ -24,12 +29,19 @@ class NearByAttractionsViewHolder(
             cardViewDeals.apply {
                 setMargins(
                     top = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp),
-                    bottom = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp))
-                layoutParams.width = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._275sdp)
-                layoutParams.height = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._155sdp)
+                    bottom = cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._7sdp)
+                )
+                layoutParams.width =
+                    cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._275sdp)
+                layoutParams.height =
+                    cardViewDeals.context.resources.getDimensionPixelSize(R.dimen._155sdp)
                 setOnClickListener {
                     Navigation.findNavController(it)
-                        .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(travelModel.id))
+                        .navigate(
+                            SearchFragmentDirections.actionSearchFragmentToDetailFragment(
+                                travelModel.id
+                            )
+                        )
                 }
             }
 
@@ -39,7 +51,7 @@ class NearByAttractionsViewHolder(
             textViewType.text = travelModel.country
 
             buttonBookmark.apply {
-                if(travelModel.isBookmark){
+                if (travelModel.isBookmark) {
                     setIconResource(R.drawable.ic_bookmark_active)
                     setIconTintResource(R.color.pink)
                 } else {

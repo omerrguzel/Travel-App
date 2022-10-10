@@ -6,7 +6,7 @@ import com.oguzel.travel_app.data.local.entity.User
 
 class FireStoreRepository {
 
-    var firestoreDB = FirebaseFirestore.getInstance()
+    private var firestoreDB = FirebaseFirestore.getInstance()
 
     fun sendUserInformationToFirestore(user: User) {
         firestoreDB.collection("Users").document(user.id).set(user, SetOptions.merge())

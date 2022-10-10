@@ -31,8 +31,6 @@ class SearchFragment : Fragment() {
     private var nearByAttractionsAdapter: NearByAttractionsAdapter =
         NearByAttractionsAdapter(arrayListOf())
     private var searchHistoryDatabase: SearchHistoryDatabase? = null
-    private var topDestinationList: List<TravelModel> = emptyList()
-    private var nearByList: List<TravelModel> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +55,12 @@ class SearchFragment : Fragment() {
         binding.editTextSearchSearchScreen.setText("")
     }
 
-    private fun fetchTravelInfoByCategory(category : String)  {
+    /**
+     * fetchTravelInfoByCategory Fetches information from Api by category and calls for
+     * related bindAdapter function on success
+     * @param category Requested string to filter as category
+     */
+    private fun fetchTravelInfoByCategory(category: String) {
         viewModel.getTravelInfoByCategory(category).observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -66,10 +69,9 @@ class SearchFragment : Fragment() {
                 }
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.gone()
-                    if(category=="topdestination"){
+                    if (category == "topdestination") {
                         bindTopDestAdapter(it.data!!)
-                    }
-                    else if(category=="nearby"){
+                    } else if (category == "nearby") {
                         bindNearByAdapter(it.data!!)
                     }
                 }
@@ -80,11 +82,20 @@ class SearchFragment : Fragment() {
         }
     }
 
+    /**
+     * bindTopDestAdapter() binds given list to top destinations recyclerview adapter.
+     * @param list Requested list to be bound to adapter.
+     */
     private fun bindTopDestAdapter(list: List<TravelModel>) {
         topDestinationsAdapter.setTravelList(list)
         binding.recyclerViewTopDestinations.adapter = topDestinationsAdapter
     }
 
+    /**
+     * bindNearByAdapter() binds given list to nearby recyclerview adapter. Additionally
+     * it initializes BookmarkClickListener which calls updateBookmark() method.
+     * @param list Requested list to be bound to adapter.
+     */
     private fun bindNearByAdapter(list: List<TravelModel>) {
         nearByAttractionsAdapter.setTravelList(list)
         binding.recyclerViewNearbyAttractions.adapter = nearByAttractionsAdapter
@@ -96,6 +107,11 @@ class SearchFragment : Fragment() {
         })
     }
 
+    /**
+     * updateBookmark() uses PUT to send inverse of current isBookmark state to API.
+     * @param id ID of travelModel to be bookmarked or to remove of its bookmark
+     * @param isBookmark Current state of isBookmark.
+     */
     private fun updateBookmark(id: String, isBookmark: BookmarkRequestModel) {
         viewModel.updateBookmark(id, isBookmark).observe(viewLifecycleOwner) {
             when (it.status) {
@@ -113,6 +129,9 @@ class SearchFragment : Fragment() {
         }
     }
 
+    /**
+     * To navigate to search history page
+     */
     private fun navigateSearchHistory() {
         binding.buttonSearchHistory.setOnClickListener {
             Navigation.findNavController(it)
@@ -120,6 +139,9 @@ class SearchFragment : Fragment() {
         }
     }
 
+    /**
+     * To navigate to search result screen
+     */
     private fun navigateSearchResult() {
         binding.buttonSearchSearchScreen.setOnClickListener {
             Navigation.findNavController(it)

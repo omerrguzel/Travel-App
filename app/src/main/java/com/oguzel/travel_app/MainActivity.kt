@@ -43,11 +43,16 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+//        binding.bottomNavigationViewMain.setOnItemSelectedListener {
+//            NavigationUI.onNavDestinationSelected(it,findNavController(R.id.loginFragment))
+//            findNavController(R.id.loginFragment).popBackStack(it.itemId, inclusive = true)
+//        }
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.detailFragment -> bottomNavigationView.gone()
                 R.id.searchResultFragment -> bottomNavigationView.gone()
-//                R.id.loginFragment ->bottomNavigationView.gone()
+                R.id.loginFragment ->bottomNavigationView.gone()
                 R.id.registerFragment -> bottomNavigationView.gone()
                 R.id.splashFragment -> bottomNavigationView.gone()
                 else -> bottomNavigationView.show()

@@ -1,7 +1,6 @@
 package com.oguzel.travel_app.presentation.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.domain.usecase.TravelUseCase
@@ -15,11 +14,11 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    fun getTravelInfo() : LiveData<Resource<ArrayList<TravelModel>>> {
+    fun getTravelInfo(): LiveData<Resource<ArrayList<TravelModel>>> {
         return travelUseCase.getTravelInfo()
     }
 
-    fun getTravelInfoByCategory(category : String) : LiveData<Resource<ArrayList<TravelModel>>> {
+    fun getTravelInfoByCategory(category: String): LiveData<Resource<ArrayList<TravelModel>>> {
         return travelUseCase.getTravelInfoByCategory(category)
     }
 }

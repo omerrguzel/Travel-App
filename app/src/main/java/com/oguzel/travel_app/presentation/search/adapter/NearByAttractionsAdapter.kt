@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.domain.model.TravelModel
@@ -15,9 +14,9 @@ class NearByAttractionsAdapter(
     private var travelList: ArrayList<TravelModel> = ArrayList(),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var mListener : BookmarksAdapter.IBookmarkClickListener
+    private lateinit var mListener: BookmarksAdapter.IBookmarkClickListener
 
-    fun setOnItemClickListener(mListener : BookmarksAdapter.IBookmarkClickListener){
+    fun setOnItemClickListener(mListener: BookmarksAdapter.IBookmarkClickListener) {
         this.mListener = mListener
     }
 
@@ -25,11 +24,11 @@ class NearByAttractionsAdapter(
         val travelBinding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), R.layout.item_deals, parent, false
         )
-        return NearByAttractionsViewHolder(travelBinding,mListener)
+        return NearByAttractionsViewHolder(travelBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as NearByAttractionsViewHolder).onBind(travelList[position],mListener)
+        (holder as NearByAttractionsViewHolder).onBind(travelList[position], mListener)
     }
 
     override fun getItemCount(): Int {

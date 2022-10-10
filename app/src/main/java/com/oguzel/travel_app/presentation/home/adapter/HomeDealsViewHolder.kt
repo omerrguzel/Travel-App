@@ -17,6 +17,11 @@ import com.oguzel.travel_app.utils.setMargins
 class HomeDealsViewHolder(
     private val travelBinding: ViewDataBinding,
 ) : RecyclerView.ViewHolder(travelBinding.root) {
+
+    /**
+     * HomeDealsAdapter uses item_deals layout for each item. In this function we are defining
+     * attributes of this item as desired.
+     */
     fun onBind(travelModel: TravelModel) {
         val binding = travelBinding as ItemDealsBinding
 

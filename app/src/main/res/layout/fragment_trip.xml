@@ -35,7 +35,7 @@
                 android:layout_marginTop="@dimen/_25sdp"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:text="@string/trip_plan"
-                android:textColor="#292C3D"
+                android:textColor="@color/page_title_color"
                 android:textFontWeight="700"
                 android:textSize="@dimen/_23ssp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,12 +55,12 @@
                 app:tabGravity="start"
                 app:tabIconTint="@drawable/tab_content_color_selector"
                 app:tabIndicator="@drawable/ic_custom_tab_indicator"
-                app:tabIndicatorColor="#FF4760"
+                app:tabIndicatorColor="@color/pink"
                 app:tabInlineLabel="true"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="#FF4760"
                 app:tabTextAppearance="@style/tab_text_trip"
-                app:tabTextColor="#C2C5D6">
+                app:tabTextColor="@color/title_grey">
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
@@ -79,9 +79,9 @@
                 android:id="@+id/recyclerViewTripsBookmarks"
                 android:layout_width="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_height="@dimen/_315sdp"
+                android:layout_height="@dimen/_330sdp"
                 android:layout_marginStart="@dimen/_13sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_13sdp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,16 +94,13 @@
                 android:layout_height="@dimen/_47sdp"
                 android:layout_marginBottom="@dimen/_70sdp"
                 android:src="@drawable/ic_add"
-                app:backgroundTint="#FF4760"
+                app:backgroundTint="@color/pink"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tint="@color/white" />
-
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
 </layout>

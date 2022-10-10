@@ -23,7 +23,7 @@ class BookmarksAdapter(
         val travelBinding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), R.layout.item_deals, parent, false
         )
-        return BookmarksViewHolder(travelBinding,mListener)
+        return BookmarksViewHolder(travelBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

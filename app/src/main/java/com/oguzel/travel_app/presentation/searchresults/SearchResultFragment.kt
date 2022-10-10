@@ -47,6 +47,11 @@ class SearchResultFragment : Fragment() {
         addSearchHistoryQuery()
     }
 
+    /**
+     * fetchTravelInfo Fetches all information from API and calls for searchModel method which
+     * returns a travelModel list that only contains requested search query in title or
+     * description
+     */
     private fun fetchTravelInfo() {
         viewModel.getTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {
@@ -74,6 +79,9 @@ class SearchResultFragment : Fragment() {
         }
     }
 
+    /**
+     * addSearchHistoryQuery() method stores searched query which is navarg with RoomDB
+     */
     private fun addSearchHistoryQuery(){
         searchHistoryDatabase = SearchHistoryDatabase.getSearchHistoryDatabase(requireContext())
         val searchHistoryModel = SearchHistoryModel(id = 0, navArgs.searchQuery)

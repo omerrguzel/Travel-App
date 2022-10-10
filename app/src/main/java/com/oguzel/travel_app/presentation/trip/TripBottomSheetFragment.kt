@@ -55,6 +55,9 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
         dropDownMenuListener()
     }
 
+    /**
+     * openDatePicker() opens Material Date Picker component
+     */
     private fun openDatePicker() {
         binding.buttonSelectTripDate.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()
@@ -68,6 +71,10 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
 
+    /**
+     * saveButtonClickListener() saves selected title and date as SelectedTripModel to sharedPref
+     *
+     */
     private fun saveButtonClickListener() {
         sharedPrefManager = SharedPrefManager(this.requireActivity())
         binding.buttonSave.setOnClickListener {
@@ -87,6 +94,10 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
 
+    /**
+     * dropDownMenuListener().onTextChanged() method is used for listening selected trip title
+     * and search in API then save it to selectedTripModel.
+     */
     private fun dropDownMenuListener() {
         binding.dropMenuText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
@@ -123,6 +134,9 @@ class TripBottomSheetFragment : BottomSheetDialogFragment() {
         })
     }
 
+    /**
+     * fetchTravelInfo() fetches all travelModels from API and binds it to dropDownMenu adapter
+     */
     private fun fetchTravelInfo() {
         viewModel.getTravelInfo().observe(viewLifecycleOwner) {
             when (it.status) {

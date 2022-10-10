@@ -3,7 +3,6 @@ package com.oguzel.travel_app.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.oguzel.travel_app.domain.model.BookmarkRequestModel
-import com.oguzel.travel_app.domain.model.ImageInfoModel
 import com.oguzel.travel_app.domain.model.TravelModel
 import com.oguzel.travel_app.domain.usecase.TravelUseCase
 import com.oguzel.travel_app.utils.Resource

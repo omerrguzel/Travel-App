@@ -8,9 +8,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzel.travel_app.R
 import com.oguzel.travel_app.domain.model.CategoryModel
-import com.oguzel.travel_app.domain.model.TravelModel
 
-class GuideCategoriesAdapter (
+class GuideCategoriesAdapter(
     private var categoryList: ArrayList<CategoryModel> = ArrayList(),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

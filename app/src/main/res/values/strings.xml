@@ -32,5 +32,19 @@
     <string name="register">Register</string>
     <string name="by_clicking_register_button_you_are_accepting_terms_of_service_and_privacy_policy">By clicking register button you are accepting Terms of Service and Privacy Policy.</string>
     <string name="where_s_your_n_next_destination">Where\'s your\n next destination?</string>
+    <string name="remove_bookmark">Remove Bookmark</string>
+    <string name="add_bookmark">Add Bookmark</string>
+    <string name="days">days</string>
+    <string name="images"> Images</string>
+    <string name="must_see">MUST SEE</string>
+    <string name="where_next">Where next?</string>
+    <string name="places_to_go_before_you_die">PLACES TO GO BEFORE YOU DIE</string>
+    <string name="deals">Deals</string>
+    <string name="all">All</string>
+    <string name="transportations">Transportations</string>
+    <string name="top_destinations">TOP DESTINATIONS</string>
+    <string name="nearby_attractions">NEARBY ATTRACTIONS</string>
+    <string name="search_history">Search History</string>
+    <string name="search_results">Search Results</string>
 
 </resources>

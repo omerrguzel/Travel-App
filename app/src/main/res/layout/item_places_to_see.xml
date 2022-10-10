@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -18,7 +17,7 @@
             android:layout_marginVertical="@dimen/_4sdp"
             android:layout_width="@dimen/_205sdp"
             android:layout_height="@dimen/_155sdp"
-            app:cardCornerRadius="16dp">
+            app:cardCornerRadius="@dimen/_13sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,7 +49,7 @@
                         app:backgroundTint="@android:color/transparent"
                         app:icon="@drawable/tab_layout_bookmark_icon_selector"
                         app:iconGravity="top"
-                        app:iconTint="#FCFCFD" />
+                        app:iconTint="@color/item_white" />
                 </RelativeLayout>
 
 
@@ -62,13 +61,11 @@
                     android:paddingStart="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_8sdp"
                     android:text="@{travelModel.description}"
-                    android:textColor="#181A25"
+                    android:textColor="@color/deals_text_color"
                     android:textFontWeight="700"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/source_sans_pro_bold" />
 
             </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
 </layout>

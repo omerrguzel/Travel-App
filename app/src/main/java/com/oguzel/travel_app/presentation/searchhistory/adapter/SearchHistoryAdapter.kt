@@ -7,8 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzel.travel_app.R
-import com.oguzel.travel_app.domain.model.TravelModel
-import com.oguzel.travel_app.presentation.searchresults.adapter.SearchResultsViewHolder
 
 class SearchHistoryAdapter(
     private var searchHistoryList: ArrayList<String> = ArrayList(),
@@ -30,7 +28,7 @@ class SearchHistoryAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setTravelList(searchHistoryList: MutableList<String>){
+    fun setTravelList(searchHistoryList: MutableList<String>) {
         this.searchHistoryList.clear()
         this.searchHistoryList.addAll(searchHistoryList)
         notifyDataSetChanged()
